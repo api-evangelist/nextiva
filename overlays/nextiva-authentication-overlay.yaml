@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Provider Authentication API
+  version: 1.0.0
+extends: openapi/nextiva-authentication-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: nextiva
+    x-apievangelist-source: https://developer.nextiva.com/nextiva/reference
+    x-apievangelist-harvested: '2026-07-31'
+    x-apievangelist-harvest-method: ReadMe API Registry (public)
+    x-apievangelist-operations: 2
+    x-apievangelist-auth: JWT bearer minted by HTTP basic auth (generateTokenWithAuthorities)
+    x-apievangelist-error-envelope: errors/nextiva-problem-types.yml
+    x-apievangelist-conventions: conventions/nextiva-conventions.yml
+    x-apievangelist-idempotency: not-supported
+    x-apievangelist-rate-limits: not-documented

@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: Provider Authentication API
+  version: 1.0.0
+  description: API for user authentication (login) and refreshing authentication tokens.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+tags:
+- name: Authentication
+  description: User login and token management operations.
+paths:
+  /provider/token-with-authorities:
+    get:
+      summary: Generate token with user authorities (Login)
+      operationId: generateTokenWithAuthorities
+      tags:
+      - Authentication
+      description: 'Logs in a user with the provided username and password using Basic Authentication.
+
+        Returns a JWT token containing the authenticated user''s authorities and tenant location information.
+
+        This endpoint provides comprehensive token generation with full permission context.
+
+        '
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: Successfully authenticated and generated token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Unauthorized - Invalid username or password.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /provider/api/token-refresh:
+    get:
+      summary: Refresh authentication token
+      operationId: refreshToken
+      tags:
+      - Authentication
+      description: 'Refreshes an existing authentication token. This endpoint uses the current valid token
+
+        (typically sent as a Bearer token in the Authorization header) to obtain a new, updated token
+
+        and location details.
+
+        '
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Token successfully refreshed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshTokenResponse'
+        '401':
+          description: Unauthorized - Invalid or expired token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        location:
+          type: string
+          description: The base URL for the API.
+        token:
+          type: string
+          description: The generated JWT authentication token.
+      required:
+      - location
+      - token
+    RefreshTokenResponse:
+      type: object
+      properties:
+        clientLocation:
+          type: string
+          description: The client-specific location for the refreshed token.
+        location:
+          type: string
+          description: The base URL for the API (may be updated).
+        token:
+          type: string
+          description: The new, refreshed JWT authentication token.
+      required:
+      - clientLocation
+      - location
+      - token
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Detailed error message.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication using username and password.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication (JWT).

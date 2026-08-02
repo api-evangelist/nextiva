@@ -1,0 +1,95 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/nextiva-conversation-openapi.yml, openapi/nextiva-workitem-service-openapi.yml,
+  openapi/nextiva-sms-messaging-openapi.yml, openapi/nextiva-authentication-openapi.yml
+summary: >-
+  Entity-relationship graph derived from the schema $refs and id-reference
+  fields in the published Nextiva Contact Center contracts. The core is the
+  Workitem — the unit of work an agent handles — which hangs off a Conversation
+  and is scoped by Tenant. Ids are opaque UUID strings with no type prefixes.
+entities:
+- name: Tenant
+  id_field: tenantId
+  described_in: openapi/nextiva-conversation-openapi.yml#/components/schemas/Conversation
+  note: Multi-tenant scoping key present on Conversation; also the subject of the
+    Provider Token Service portal/location token operations.
+- name: Conversation
+  id_field: conversationId
+  alt_ids: [_id, id]
+  fields: [conversationType, name, topicName, description, phoneNumber, sharedInboxId,
+    sharedInboxName, tenantId, parentEngagementId, parentTicketId, parentWorkitemId,
+    participants, createdAt, createdBy, modifiedAt, modifiedBy, deletedAt, unreadCount,
+    totalCount]
+  operations: [fetchConversations, fetchConversationById, fetchConversationWorkItemsByStatus,
+    fetchUnreadCounts, fetchConversationActivitySummary]
+- name: Workitem
+  id_field: workitemId
+  alt_ids: [_id]
+  fields: [state, channelType, type, priority, agentUsername, createdAt, modifiedAt]
+  operations: [fetchWorkitems, fetchWorkitemById, changeWorkitemPriority, activeWorkitemCall,
+    holdWorkitemCall, hangUpWorkitemCall, muteWorkitemCall, unMuteWorkitemCall, sendDtmfTones,
+    sendEmailResponse, transferWorkitemToAgent, transferWorkitemToInbox]
+- name: Participant
+  id_field: id
+  fields: [type, firstName, lastName, phoneNumber, contact, user, addedBy, joinedAt,
+    archivedAt, notifyByEmail, notifyBySMS, notifyByVoice, notifyByWeb]
+- name: Contact
+  id_field: id
+  fields: [email]
+  note: Represented in the Conversation contract by ContactPartial (id, email) and
+    a bare Contact (id); the full contact schema is not published in these specs.
+- name: User
+  id_field: _id
+  fields: [username, firstName, lastName, phoneNumber, addresses, personalInboxCampaignId]
+  schema: UserParticipantDetails
+- name: Campaign
+  id_field: campaignId
+  operations: [fetchConversationByCampaignId, sendSmsMessage]
+  note: Required on the SMS send payload; also scopes recent conversation workitems.
+- name: Ticket
+  id_field: ticketId
+  operations: [fetchTicketConversations]
+- name: Engagement
+  id_field: parentEngagementId
+  schema: EngagementData
+- name: Message
+  id_field: messageId
+- name: Inbox
+  id_field: inboxId
+  alt_ids: [sharedInboxId]
+  operations: [transferWorkitemToInbox]
+- name: CallRecording
+  id_field: id
+  fields: [url]
+  schema: ConversationCallRecordingData
+  operations: [fetchTranscriptionsAndRecordings]
+- name: Transcript
+  id_field: id
+  fields: [objectType, type, status, startedAt, endedAt, content, createdAt, modifiedAt]
+  source: WebSocket LiveTranscriptionNotification payload and fetchTranscriptionsAndRecordings
+relationships:
+- {from: Conversation, to: Tenant, kind: belongs_to, via: tenantId}
+- {from: Conversation, to: Participant, kind: has_many, via: participants}
+- {from: Conversation, to: Workitem, kind: has_many, via: parentWorkitemId, evidence: fetchConversationById
+    returns the workitems of a conversation}
+- {from: Conversation, to: Ticket, kind: belongs_to, via: parentTicketId}
+- {from: Conversation, to: Engagement, kind: belongs_to, via: parentEngagementId}
+- {from: Conversation, to: Inbox, kind: belongs_to, via: sharedInboxId}
+- {from: Participant, to: Contact, kind: has_one, via: contact}
+- {from: Participant, to: User, kind: has_one, via: user}
+- {from: Workitem, to: User, kind: belongs_to, via: agentUsername}
+- {from: Workitem, to: CallRecording, kind: has_many, via: fetchTranscriptionsAndRecordings}
+- {from: Workitem, to: Transcript, kind: has_many, via: fetchTranscriptionsAndRecordings}
+- {from: Workitem, to: Inbox, kind: transferred_to, via: inboxId}
+- {from: Workitem, to: User, kind: transferred_to, via: userId}
+- {from: Campaign, to: Workitem, kind: has_many, via: fetchConversationByCampaignId}
+- {from: Campaign, to: Message, kind: has_many, via: sendSmsMessage campaignId}
+envelope:
+  paginated_response:
+    fields: [count, total, objects]
+    used_by: [Conversation, Workitem]
+id_conventions:
+  format: opaque UUID strings
+  prefixes: none
+  evidence: 'sample ids such as 52d9a90c-d246-4e6a-bb10-28f79f53d16b in the published
+    transcription payload; no type-prefixed ids anywhere in the contracts'

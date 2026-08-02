@@ -1,0 +1,62 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/*.yml, https://www.nextiva.com/security-policy.html, https://www.nextiva.com/resources/learn/security-certification-overview
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: 'five published contracts declare openapi 3.0.0 / 3.0.3 (four at 3.0.0,
+    the Provider Token Service at 3.0.3)'
+- id: http-basic-auth
+  conforms: true
+  evidence: 'components.securitySchemes.basicAuth (type http, scheme basic) in openapi/nextiva-authentication-openapi.yml'
+- id: jwt-bearer
+  conforms: true
+  evidence: 'components.securitySchemes.bearerAuth / springAuth (type http, scheme bearer, bearerFormat JWT) across four specs'
+- id: oauth2
+  conforms: false
+  evidence: 'no oauth2 securityScheme in any published spec; no OAuth authorization
+    server documented and /.well-known/oauth-authorization-server returns 404'
+- id: oidc
+  conforms: false
+  evidence: '/.well-known/openid-configuration returns 404 on every Nextiva host'
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'error responses use application/json with a bespoke {code, message} envelope
+    (Provider Token Service uses {type, message, code, timestamp}); no application/problem+json media type in any spec'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: 'no /.well-known/security.txt on www.nextiva.com or api.nextiva.com (a
+    responsible-disclosure program IS published at /security-policy.html)'
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: 'no Sunset or Deprecation header documented; no deprecated operations in any spec'
+- id: asyncapi
+  conforms: false
+  evidence: 'a real WebSocket event surface is documented (18 notification types) but no AsyncAPI document is published'
+- id: pagination
+  conforms: true
+  evidence: 'PaginatedResponse component plus limit/offset, start/rows, pageNumber/pageSize
+    and cursor query parameters across the Conversation and Workitem Service specs'
+- id: idempotency
+  conforms: false
+  evidence: 'no Idempotency-Key parameter or header in any spec and no idempotency
+    guidance in the developer docs; POST call-control operations are not documented as safe to retry'
+- id: a2a-agent-card
+  conforms: false
+  evidence: 'no /.well-known/agent-card.json or /.well-known/agent.json on any host (docs host 200s are ReadMe SPA HTML)'
+- id: mcp
+  conforms: false
+  evidence: 'no hosted or remote Nextiva MCP server found in docs, the GitHub org, npm or MCP registries'
+compliance:
+  published: true
+  source: https://www.nextiva.com/resources/learn/security-certification-overview
+  certifications:
+  - {name: SOC 2, claim: 'stated as "SOC 2 Certified"'}
+  - {name: HIPAA, claim: 'HIPAA-compliant offering with a signed Business Associate Agreement; Nextiva HIPAA Guidelines published at /legal.html?doc=13'}
+  - {name: HITRUST, claim: named in the security and privacy certifications overview}
+  - {name: PCI DSS, claim: named in the security and privacy certifications overview}
+  - {name: GDPR, claim: named in the security and privacy certifications overview}
+  note: >-
+    These are provider claims read from Nextiva marketing and support pages; no
+    attestation report, certificate number or third-party trust center was
+    located (trust.nextiva.com does not resolve).

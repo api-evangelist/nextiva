@@ -1,0 +1,625 @@
+openapi: 3.0.0
+info:
+  title: Workitem Service API
+  version: 1.0.0
+  description: API for managing and retrieving Workitem data and controlling call/interaction states.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+tags:
+- name: Workitems
+  description: Operations related to Workitems (calls, messages, etc.)
+- name: Call Management
+  description: Actions specific to managing calls within workitems
+- name: Recording
+  description: Operations related to recording workitem interactions
+- name: Transfers
+  description: Operations for transferring workitems
+- name: Conferences
+  description: Operations for managing conferences
+- name: Email
+  description: Email-related workitem operations
+- name: Surveys
+  description: Survey management for workitems
+- name: DTMF
+  description: DTMF tone sending for calls
+paths:
+  /data/api/types/workitem:
+    get:
+      summary: Fetch all workitems
+      operationId: fetchWorkitems
+      tags:
+      - Workitems
+      description: 'Fetch all workitems. This endpoint retrieves a paginated list of workitems, allowing filtering by query
+        string, rows, start index, and additional query parameters.
+
+        '
+      parameters:
+      - in: query
+        name: q
+        schema:
+          type: string
+        description: Query string for filtering workitems.
+      - in: query
+        name: rows
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items per page.
+      - in: query
+        name: start
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        description: Pagination starting index.
+      - in: query
+        name: queryParams
+        schema:
+          type: object
+          additionalProperties: true
+        description: Additional query parameters for filtering.
+      responses:
+        '200':
+          description: A paginated list of workitems.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchWorkitemsResponseBody'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/workitems/{id}:
+    get:
+      summary: Fetch a specific workitem by ID
+      operationId: fetchWorkitemById
+      tags:
+      - Workitems
+      description: 'Fetch a specific workitem by ID. This endpoint retrieves a single workitem by its unique identifier.
+
+        '
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem.
+      responses:
+        '200':
+          description: The requested workitem object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        '404':
+          description: Workitem not found.
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/bridge:
+    post:
+      summary: Activates a call for a given workitem (Bridge)
+      operationId: activeWorkitemCall
+      tags:
+      - Call Management
+      description: 'Activates a call for a given workitem. This endpoint makes a POST request to bridge (activate) a call
+        for the specified workitem.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to activate.
+      responses:
+        '200':
+          description: Call successfully activated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/hold:
+    post:
+      summary: Puts a call on hold
+      operationId: holdWorkitemCall
+      tags:
+      - Call Management
+      description: 'Puts a call on hold for a given workitem. This endpoint sends a POST request to place the specified workitem
+        (call) on hold.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to put on hold.
+      responses:
+        '200':
+          description: Call successfully put on hold.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/hangup:
+    post:
+      summary: Ends a call
+      operationId: hangUpWorkitemCall
+      tags:
+      - Call Management
+      description: 'Ends a call associated with a given workitem. This endpoint sends a POST request to terminate the specified
+        workitem (call).
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to hang up.
+      responses:
+        '200':
+          description: Call successfully ended.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/mute:
+    post:
+      summary: Mutes a call
+      operationId: muteWorkitemCall
+      tags:
+      - Call Management
+      description: 'Mutes a call associated with a given workitem. This endpoint sends a POST request to mute the specified
+        workitem (call).
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to mute.
+      responses:
+        '200':
+          description: Call successfully muted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Unmutes a call
+      operationId: unMuteWorkitemCall
+      tags:
+      - Call Management
+      description: 'Unmutes a call associated with a given workitem. This endpoint sends a DELETE request to unmute the specified
+        workitem (call).
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to unmute.
+      responses:
+        '200':
+          description: Call successfully unmuted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /workflows/api/workitems/{workitemId}/acd:
+    post:
+      summary: Change the priority of a workitem
+      operationId: changeWorkitemPriority
+      tags:
+      - Workitems
+      description: 'Changes the priority of a workitem. This endpoint updates the priority of a specific workitem within the
+        ACD system.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - priority
+              properties:
+                priority:
+                  $ref: '#/components/schemas/WorkItemPriority'
+      responses:
+        '200':
+          description: Workitem priority successfully changed.
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/workitems/{workitemId}/sendemailresponse:
+    post:
+      summary: Sends an email response for a workitem
+      operationId: sendEmailResponse
+      tags:
+      - Email
+      description: 'Sends an email response related to a specific workitem. This endpoint allows for responding to email-based
+        workitems with a structured email.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem associated with the email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailResponsePayload'
+      responses:
+        '200':
+          description: Email response successfully sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/usertransfer/{userId}:
+    post:
+      summary: Transfers a workitem to another agent
+      operationId: transferWorkitemToAgent
+      tags:
+      - Transfers
+      description: 'Transfers a workitem (e.g., an active call) to another specified agent. This allows for routing work to
+        the appropriate personnel.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem to transfer.
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the target agent.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferToAgentPayload'
+      responses:
+        '200':
+          description: Workitem successfully transferred to agent.
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/queuetransfer/{inboxId}:
+    post:
+      summary: Transfers a workitem to an inbox/queue
+      operationId: transferWorkitemToInbox
+      tags:
+      - Transfers
+      description: 'Transfers a workitem (e.g., an active call or message) to a specified inbox or queue. This is used for
+        routing work to a group of agents or a specific processing queue.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem to transfer.
+      - in: path
+        name: inboxId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the target inbox/queue.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferToInboxPayload'
+      responses:
+        '200':
+          description: Workitem successfully transferred to inbox/queue.
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/dtmf/{digit}:
+    post:
+      summary: Sends DTMF tones during a call
+      operationId: sendDtmfTones
+      tags:
+      - DTMF
+      description: 'Sends Dual-Tone Multi-Frequency (DTMF) tones during an active call associated with a workitem. This can
+        be used for interacting with IVR systems or entering digits.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to send DTMF tones to.
+      - in: path
+        name: digit
+        schema:
+          type: string
+        required: true
+        description: The DTMF digit(s) to send.
+      responses:
+        '200':
+          description: DTMF tones sent successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Workitem:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Internal unique identifier (MongoDB ID).
+        workitemId:
+          type: string
+          description: Public unique identifier for the workitem.
+        state:
+          type: string
+          description: Current state of the workitem (e.g., active, hold, inqueue).
+        channelType:
+          type: string
+          description: The communication channel (e.g., voice, chat, email).
+        type:
+          type: string
+          description: The specific type of workitem (e.g., InboundCall, OutboundSMS).
+        priority:
+          type: integer
+          description: Priority of the workitem (1-5).
+        agentUsername:
+          type: string
+          description: Username of the assigned agent.
+        createdAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when created.
+        modifiedAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when last modified.
+    PaginatedResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workitem'
+          description: Array of workitem objects.
+    FetchWorkitemsResponseBody:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+    WorkItemPriority:
+      type: integer
+      format: int32
+      description: Priority level of a workitem (1-5, 5 being highest).
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    WorkitemRecordingOption:
+      type: string
+      enum:
+      - keepCurrent
+      - startRecording
+      - stopRecording
+      description: Recording options for transfers.
+    SendEmailResponsePayload:
+      type: object
+      required:
+      - from
+      - to
+      - subject
+      properties:
+        bccAddresses:
+          type: array
+          items:
+            type: string
+          description: Email addresses to BCC.
+        bodyParts:
+          type: object
+          description: Body parts of the email.
+        ccAddresses:
+          type: array
+          items:
+            type: string
+          description: Email addresses to CC.
+        createdAt:
+          type: integer
+          format: int64
+          description: Creation timestamp.
+        from:
+          type: string
+          format: email
+          description: Sender's email address.
+        subject:
+          type: string
+          description: Email subject.
+        to:
+          type: string
+          format: email
+          description: Recipient's email address.
+        toAddresses:
+          type: array
+          items:
+            type: string
+          description: List of recipient email addresses.
+    TransferToAgentPayload:
+      type: object
+      required:
+      - userId
+      - workitemId
+      properties:
+        eventName:
+          type: string
+          description: Name given to the transfer event.
+        recording:
+          $ref: '#/components/schemas/WorkitemRecordingOption'
+        survey:
+          type: object
+          description: Survey data.
+        userId:
+          type: string
+          description: The ID of the user (agent) to transfer the workitem to.
+        workitemId:
+          type: string
+          description: The ID of the workitem to transfer.
+    TransferToInboxPayload:
+      type: object
+      required:
+      - inboxId
+      - workitemId
+      properties:
+        eventName:
+          type: string
+          description: Name given to the transfer event.
+        inboxId:
+          type: string
+          description: The ID of the target inbox/queue.
+        recording:
+          $ref: '#/components/schemas/WorkitemRecordingOption'
+        ringAll:
+          type: boolean
+          description: Whether to ring all agents in the inbox.
+        survey:
+          type: object
+          description: Survey data.
+        workitemId:
+          type: string
+          description: The ID of the workitem to transfer.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []

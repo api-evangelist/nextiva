@@ -1,0 +1,48 @@
+generated: '2026-07-31'
+method: probed
+source: live HTTPS probes, 2026-07-31
+summary: >-
+  No /.well-known/ discovery documents were found on any Nextiva host. The
+  api.nextiva.com API host returns 404 for every probed path. The
+  developer.nextiva.com docs host is a ReadMe.io single-page hub whose catch-all
+  answers HTTP 200 with an HTML document shell for EVERY /.well-known/* path —
+  each 200 below was fetched and confirmed to be `<!DOCTYPE html>` ReadMe markup,
+  not a discovery document, so none is recorded as a hit. www.nextiva.com
+  publishes no security.txt; the responsible-disclosure program lives at
+  https://www.nextiva.com/security-policy.html instead (captured in
+  security/nextiva-vulnerability-disclosure.yml).
+documents: []
+probes:
+- host: https://api.nextiva.com
+  results:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}
+- host: https://www.nextiva.com
+  results:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}
+- host: https://developer.nextiva.com
+  note: ReadMe.io SPA catch-all — every path answers 200 with an HTML shell.
+  results:
+  - {path: /.well-known/security.txt, status: 200, content_type: text/html, hit: false, reason: html-spa-catchall}
+  - {path: /.well-known/ai-plugin.json, status: 200, content_type: text/html, hit: false, reason: html-spa-catchall}
+  - {path: /.well-known/agent-card.json, status: 200, content_type: text/html, hit: false, reason: html-spa-catchall}
+  - {path: /.well-known/agent.json, status: 200, content_type: text/html, hit: false, reason: html-spa-catchall}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+- host: https://api-staging.nextiva.com
+  results:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}

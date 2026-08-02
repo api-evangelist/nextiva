@@ -1,0 +1,110 @@
+generated: '2026-07-31'
+method: searched
+source: https://developer.nextiva.com/nextiva/docs/sdk-architecture, https://developer.nextiva.com/nextiva/docs/real-time-transcription-stream,
+  https://developer.nextiva.com/nextiva/docs/acd-service, https://developer.nextiva.com/nextiva/docs/call-control,
+  https://developer.nextiva.com/nextiva/docs/retrieve-customer-contextual-information
+spec_type: none
+spec_published: false
+kind: websocket-event-stream
+summary: >-
+  Nextiva publishes NO AsyncAPI document, but it does document a real event
+  surface: after an HTTP command the server opens WebSocket connections and
+  pushes events to the SDK, which re-emits them on an observable stream
+  (`sdk.events$`, filtered with `ofType(EventTypes.X)`). Two channels are
+  described in the SDK architecture guide. The event names below are the ones
+  Nextiva actually names in its published docs, each recorded with the doc page
+  it appears on and whether the docs classify it as an external (subscribable)
+  or internal (SDK-private) event. Payload schemas are not published except for
+  the live-transcription samples, so no schemas are asserted here. There is no
+  customer-configurable HTTP webhook surface: the SMS Messaging API description
+  states that inbound SMS events "are typically consumed as Workitems via the
+  SDK's event stream, with webhook configurations handled internally by the
+  Nextiva platform."
+channels:
+- name: events
+  transport: websocket
+  direction: server-to-client
+  purpose: >-
+    Real-time system events — incoming calls, status changes, offer
+    notifications, workitem state changes, live transcription.
+- name: analytics
+  transport: websocket
+  direction: server-to-client
+  purpose: >-
+    Supervisory data — users, queues, campaigns, outbound lists and workitem
+    statistics.
+- name: voice-signaling
+  transport: websocket
+  protocol: mod_verto (FreeSWITCH)
+  direction: bidirectional
+  purpose: >-
+    Call signaling between the browser and FreeSWITCH; media then flows over
+    RTP.
+subscription:
+  api: sdk.events$
+  operator: ofType(EventTypes.<Name>)
+  example_import: "import { EventTypes, ofType } from '@nextiva/ncx-web-sdk';"
+events:
+- name: LiveTranscriptionNotification
+  visibility: external
+  service: transcription
+  description: Emitted in real time as audio is transcribed.
+  documented_at: https://developer.nextiva.com/nextiva/docs/real-time-transcription-stream
+  payload_fields: [id, name, createdAt, workitemId, result, message.transcript]
+- name: LiveTranscriptionCompletedNotification
+  visibility: external
+  service: transcription
+  description: Emitted after the transcription session ends.
+  documented_at: https://developer.nextiva.com/nextiva/docs/real-time-transcription-stream
+- name: WorkitemStateChangeNotification
+  visibility: external
+  service: workitem
+  description: Emitted when the state of a workitem changes.
+  documented_at: https://developer.nextiva.com/nextiva/docs/call-control
+- name: PhoneStateNotification
+  visibility: external
+  service: call-control
+  description: Emitted when the agent phone state changes.
+  documented_at: https://developer.nextiva.com/nextiva/docs/call-control
+- name: OffersChangedNotification
+  visibility: external
+  service: acd
+  description: >-
+    Emitted with the updated list of offers after the ACD service adds or
+    removes an offer.
+  documented_at: https://developer.nextiva.com/nextiva/docs/acd-service
+- name: OfferNotification
+  visibility: internal
+  service: acd
+  description: SDK-internal event raised when a new ACD offer arrives.
+  documented_at: https://developer.nextiva.com/nextiva/docs/acd-service
+- name: OfferAcceptedNotification
+  visibility: internal
+  service: acd
+  documented_at: https://developer.nextiva.com/nextiva/docs/acd-service
+- name: OfferRejectedNotification
+  visibility: internal
+  service: acd
+  documented_at: https://developer.nextiva.com/nextiva/docs/acd-service
+- name: OfferExpiredNotification
+  visibility: internal
+  service: acd
+  documented_at: https://developer.nextiva.com/nextiva/docs/acd-service
+- name: OfferTerminatedByHangupNotification
+  visibility: internal
+  service: acd
+  documented_at: https://developer.nextiva.com/nextiva/docs/acd-service
+- name: OfferRemovedNotification
+  visibility: internal
+  service: acd
+  documented_at: https://developer.nextiva.com/nextiva/docs/acd-service
+webhooks:
+  customer_configurable: false
+  note: >-
+    No outbound HTTP webhook registration API or webhook catalog is published.
+    Events reach the customer through the SDK WebSocket stream only.
+gaps:
+- no AsyncAPI document published
+- no message schemas published for most events (only live-transcription samples)
+- no WebSocket endpoint URL published (the SDK resolves it after login)
+- no customer-configurable HTTP webhooks

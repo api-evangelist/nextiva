@@ -1,0 +1,163 @@
+generated: '2026-07-31'
+method: derived
+status: candidate
+source: openapi/nextiva-authentication-openapi.yml, openapi/nextiva-conversation-openapi.yml, openapi/nextiva-provider-authentication-openapi.yml,
+  openapi/nextiva-sms-messaging-openapi.yml, openapi/nextiva-workitem-service-openapi.yml
+note: Nextiva publishes NO hosted or remote MCP server. Searched the developer portal (developer.nextiva.com), the
+  nextiva GitHub organization, npm and the public MCP registries on 2026-07-31 — no result, and mcp.nextiva.com
+  does not resolve. This is a CANDIDATE tool surface derived mechanically from the operationIds in the five harvested
+  Nextiva OpenAPI contracts; no MCP endpoint is implied to exist. Every source_operation was verified against the
+  spec it names.
+server:
+  name: nextiva
+  transport: http
+  url: null
+auth:
+  model: JWT bearer minted by HTTP basic auth via generateTokenWithAuthorities
+  artifact: authentication/nextiva-authentication.yml
+tools:
+- name: generateTokenWithAuthorities
+  description: Generate token with user authorities (Login)
+  method: GET
+  path: /provider/token-with-authorities
+  source_operation: openapi/nextiva-authentication-openapi.yml#generateTokenWithAuthorities
+- name: refreshToken
+  description: Refresh authentication token
+  method: GET
+  path: /provider/api/token-refresh
+  source_operation: openapi/nextiva-authentication-openapi.yml#refreshToken
+- name: fetchConversations
+  description: Fetch all conversations
+  method: GET
+  path: /data/api/types/conversation
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchConversations
+- name: fetchConversationById
+  description: Fetch a conversation by ID, including its associated workitems
+  method: GET
+  path: /analytics/api/conversations/{conversationId}/workitems
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchConversationById
+- name: fetchConversationWorkItemsByStatus
+  description: Fetch workitems within a conversation by their status
+  method: GET
+  path: /analytics/api/conversations/{conversationId}/workitems/{workItemStatus}
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchConversationWorkItemsByStatus
+- name: fetchConversationByCampaignId
+  description: Fetch recent conversation workitems for a campaign
+  method: GET
+  path: /analytics/api/campaigns/{campaignId}/recentconversationworkitems
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchConversationByCampaignId
+- name: fetchRecentConversationWorkitemEngagements
+  description: Fetch recent conversation workitem engagements
+  method: GET
+  path: /analytics/api/recentConversationWorkitems
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchRecentConversationWorkitemEngagements
+- name: fetchConversationHistoryByParticipantId
+  description: Fetch conversation history by participant ID
+  method: GET
+  path: /analytics/api/conversations/workitems
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchConversationHistoryByParticipantId
+- name: fetchTicketConversations
+  description: Fetch conversations associated with a ticket
+  method: GET
+  path: /analytics/api/tickets/{ticketId}/conversations
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchTicketConversations
+- name: fetchUnreadCounts
+  description: Fetch unread conversation counts
+  method: GET
+  path: /data/api/types/conversation/unread/counts
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchUnreadCounts
+- name: fetchTranscriptionsAndRecordings
+  description: Fetch transcriptions and recordings for a specific workitem within a conversation
+  method: GET
+  path: /analytics/api/types/conversation/{conversationId}/workitems/{workitemId}/transcriptions-and-recordings
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchTranscriptionsAndRecordings
+- name: fetchConversationActivitySummary
+  description: Fetch a summary of conversation activity (DEPRECATED)
+  method: GET
+  path: /analytics/api/conversationActivitySummary
+  source_operation: openapi/nextiva-conversation-openapi.yml#fetchConversationActivitySummary
+- name: generateTokenWithAuthorities
+  description: Generate token with user authorities (test)
+  method: GET
+  path: /token-with-authorities
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#generateTokenWithAuthorities
+- name: generateToken
+  description: Generate basic token
+  method: GET
+  path: /token
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#generateToken
+- name: authenticate
+  description: Authenticate and redirect
+  method: POST
+  path: /auth
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#authenticate
+- name: generatePortalToken
+  description: Generate portal access token
+  method: GET
+  path: /portal/token-with-authorities
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#generatePortalToken
+- name: sendSmsMessage
+  description: Send an outbound SMS message
+  method: POST
+  path: /users/api/sms
+  source_operation: openapi/nextiva-sms-messaging-openapi.yml#sendSmsMessage
+- name: fetchWorkitems
+  description: Fetch all workitems
+  method: GET
+  path: /data/api/types/workitem
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#fetchWorkitems
+- name: fetchWorkitemById
+  description: Fetch a specific workitem by ID
+  method: GET
+  path: /users/api/workitems/{id}
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#fetchWorkitemById
+- name: activeWorkitemCall
+  description: Activates a call for a given workitem (Bridge)
+  method: POST
+  path: /users/api/calls/{workitemId}/bridge
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#activeWorkitemCall
+- name: holdWorkitemCall
+  description: Puts a call on hold
+  method: POST
+  path: /users/api/calls/{workitemId}/hold
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#holdWorkitemCall
+- name: hangUpWorkitemCall
+  description: Ends a call
+  method: POST
+  path: /users/api/calls/{workitemId}/hangup
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#hangUpWorkitemCall
+- name: muteWorkitemCall
+  description: Mutes a call
+  method: POST
+  path: /users/api/calls/{workitemId}/mute
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#muteWorkitemCall
+- name: unMuteWorkitemCall
+  description: Unmutes a call
+  method: DELETE
+  path: /users/api/calls/{workitemId}/mute
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#unMuteWorkitemCall
+- name: changeWorkitemPriority
+  description: Change the priority of a workitem
+  method: POST
+  path: /workflows/api/workitems/{workitemId}/acd
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#changeWorkitemPriority
+- name: sendEmailResponse
+  description: Sends an email response for a workitem
+  method: POST
+  path: /users/api/workitems/{workitemId}/sendemailresponse
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#sendEmailResponse
+- name: transferWorkitemToAgent
+  description: Transfers a workitem to another agent
+  method: POST
+  path: /users/api/calls/{workitemId}/usertransfer/{userId}
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#transferWorkitemToAgent
+- name: transferWorkitemToInbox
+  description: Transfers a workitem to an inbox/queue
+  method: POST
+  path: /users/api/calls/{workitemId}/queuetransfer/{inboxId}
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#transferWorkitemToInbox
+- name: sendDtmfTones
+  description: Sends DTMF tones during a call
+  method: POST
+  path: /users/api/calls/{workitemId}/dtmf/{digit}
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#sendDtmfTones

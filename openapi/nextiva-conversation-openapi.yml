@@ -1,0 +1,905 @@
+openapi: 3.0.0
+info:
+  title: Conversation API
+  version: 1.0.0
+  description: API for managing and retrieving conversation data.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+tags:
+- name: Conversations
+  description: Operations related to conversations
+paths:
+  /data/api/types/conversation:
+    get:
+      summary: Fetch all conversations
+      operationId: fetchConversations
+      tags:
+      - Conversations
+      description: 'Fetch conversations. This endpoint retrieves a paginated list of all conversations, allowing filtering
+        by rows and start index.
+
+        '
+      parameters:
+      - in: query
+        name: rows
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items per page.
+      - in: query
+        name: start
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        description: Pagination starting index.
+      responses:
+        '200':
+          description: A paginated list of conversations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/conversations/{conversationId}/workitems:
+    get:
+      summary: Fetch a conversation by ID, including its associated workitems
+      operationId: fetchConversationById
+      tags:
+      - Conversations
+      description: 'Fetches a conversation by its ID, including its associated workitems. This endpoint allows for filtering
+        by various parameters and different API versions.
+
+        '
+      parameters:
+      - in: path
+        name: conversationId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the conversation.
+      - in: query
+        name: cursor
+        schema:
+          type: integer
+          format: int32
+        description: Cursor for pagination (for v2).
+      - in: query
+        name: includeCallRecordings
+        schema:
+          type: boolean
+        description: Whether to include call recordings.
+      - in: query
+        name: includeConversation
+        schema:
+          type: boolean
+        description: Whether to include conversation details.
+      - in: query
+        name: includeParentEngagement
+        schema:
+          type: boolean
+        description: Whether to include parent engagement details.
+      - in: query
+        name: includeSummary
+        schema:
+          type: boolean
+        description: Whether to include a summary.
+      - in: query
+        name: includeVoicemail
+        schema:
+          type: boolean
+        description: Whether to include voicemail.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items per page (for v2).
+      - in: query
+        name: mentioned
+        schema:
+          type: boolean
+        description: Filter messages that mention the logged user.
+      - in: query
+        name: rows
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items per page (for v1).
+      - in: query
+        name: start
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        description: Pagination starting index (for v1).
+      - in: query
+        name: version
+        schema:
+          type: string
+          enum:
+          - v1
+          - v2
+          default: v1
+        description: API version to use.
+      - in: query
+        name: workitemId
+        schema:
+          type: string
+        description: Filter by workitem ID.
+      responses:
+        '200':
+          description: A conversation object by ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationByIdResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/conversations/{conversationId}/workitems/{workItemStatus}:
+    get:
+      summary: Fetch workitems within a conversation by their status
+      operationId: fetchConversationWorkItemsByStatus
+      tags:
+      - Conversations
+      description: 'Fetches a conversation''s messages with workItems only in a given status. This allows filtering workitems
+        within a specific conversation based on their status.
+
+        '
+      parameters:
+      - in: path
+        name: conversationId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the conversation.
+      - in: path
+        name: workItemStatus
+        schema:
+          type: string
+        required: true
+        description: Status of the workitems to filter by (e.g., 'draft').
+      - in: query
+        name: rows
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items per page.
+      - in: query
+        name: start
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        description: Pagination starting index.
+      responses:
+        '200':
+          description: A paginated list of workitems filtered by status within a conversation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/campaigns/{campaignId}/recentconversationworkitems:
+    get:
+      summary: Fetch recent conversation workitems for a campaign
+      operationId: fetchConversationByCampaignId
+      tags:
+      - Campaigns
+      - Conversations
+      description: 'Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations
+        by various criteria such as archived status, call types, and mentions.
+
+        '
+      parameters:
+      - in: path
+        name: campaignId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the campaign.
+      - in: query
+        name: archived
+        schema:
+          type: boolean
+        description: Filter archived conversations.
+      - in: query
+        name: calls
+        schema:
+          type: boolean
+        description: Filter calls.
+      - in: query
+        name: conversationType
+        schema:
+          type: string
+          enum:
+          - contact_based
+          - shared_inbox_internal
+          - internal_chat
+          - channel
+        description: Filter by conversation type.
+      - in: query
+        name: draft
+        schema:
+          type: boolean
+        description: Filter draft conversations.
+      - in: query
+        name: inboundCalls
+        schema:
+          type: boolean
+        description: Filter inbound calls.
+      - in: query
+        name: latest
+        schema:
+          type: boolean
+        description: Filter latest conversations.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items to return.
+      - in: query
+        name: mentioned
+        schema:
+          type: boolean
+        description: Filter messages that have mentions.
+      - in: query
+        name: messages
+        schema:
+          type: boolean
+        description: Filter messages.
+      - in: query
+        name: missedCalls
+        schema:
+          type: boolean
+        description: Filter missed calls.
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        description: Offset for pagination.
+      - in: query
+        name: outboundCalls
+        schema:
+          type: boolean
+        description: Filter outbound calls.
+      - in: query
+        name: read
+        schema:
+          type: boolean
+        description: Filter read messages.
+      - in: query
+        name: scope
+        schema:
+          type: string
+          enum:
+          - INTERNAL
+          - EXTERNAL
+        description: Filter by scope.
+      - in: query
+        name: totalUnread
+        schema:
+          type: boolean
+        description: Include unread count for each conversation.
+      - in: query
+        name: voicemails
+        schema:
+          type: boolean
+        description: Filter voicemails.
+      - in: query
+        name: workitem
+        schema:
+          type: string
+        description: Filter by workitem ID.
+      responses:
+        '200':
+          description: A paginated list of conversations related to a campaign.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/recentConversationWorkitems:
+    get:
+      summary: Fetch recent conversation workitem engagements
+      operationId: fetchRecentConversationWorkitemEngagements
+      tags:
+      - Conversations
+      description: 'Fetches recent conversation workitem engagements based on provided parameters like cursor, filter type,
+        and limit. This helps in paginating and filtering recent conversation activity.
+
+        '
+      parameters:
+      - in: query
+        name: cursor
+        schema:
+          type: integer
+          format: int32
+        description: Cursor for pagination.
+      - in: query
+        name: filter
+        schema:
+          $ref: '#/components/schemas/ConversationFilterTabType'
+        description: Filter type for conversations.
+      - in: query
+        name: ignoreVoicemailTranscripts
+        schema:
+          type: boolean
+        description: Whether to ignore voicemail transcripts.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+        description: Number of items per page.
+      - in: query
+        name: tab
+        schema:
+          $ref: '#/components/schemas/ConversationFilterTabType'
+        description: Tab filter for conversations.
+      responses:
+        '200':
+          description: A paginated list of recent conversation workitem engagements.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecentConversationWorkitemEngagementsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/conversations/workitems:
+    get:
+      summary: Fetch conversation history by participant ID
+      operationId: fetchConversationHistoryByParticipantId
+      tags:
+      - Conversations
+      description: 'Fetches conversation messages between the logged user and the participants specified in the `participantIds`
+        array. This endpoint provides paginated history for specific participants.
+
+        '
+      parameters:
+      - in: query
+        name: pageNumber
+        schema:
+          type: integer
+          format: int32
+          default: 1
+        description: Page number for pagination.
+      - in: query
+        name: pageSize
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items per page.
+      - in: query
+        name: participantIds
+        schema:
+          type: array
+          items:
+            type: string
+        description: IDs of the participants to filter by.
+        style: form
+        explode: true
+      responses:
+        '200':
+          description: A paginated list of conversation workitems for the specified participants.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationsResponseWithContactArray'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/tickets/{ticketId}/conversations:
+    get:
+      summary: Fetch conversations associated with a ticket
+      operationId: fetchTicketConversations
+      tags:
+      - Conversations
+      - Tickets
+      description: 'Fetches all conversations associated with a specific ticket ID. This provides a paginated list of conversations
+        relevant to a particular support ticket.
+
+        '
+      parameters:
+      - in: path
+        name: ticketId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the ticket.
+      responses:
+        '200':
+          description: A paginated list of conversations related to a specific ticket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketConversationsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /data/api/types/conversation/unread/counts:
+    get:
+      summary: Fetch unread conversation counts
+      operationId: fetchUnreadCounts
+      tags:
+      - Conversations
+      description: 'Fetches unread counts for various types of conversations. This endpoint provides a summary of internal,
+        mentions, total, voice calls, and voicemails unread counts.
+
+        '
+      responses:
+        '200':
+          description: Unread counts for conversations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnreadCounts'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/types/conversation/{conversationId}/workitems/{workitemId}/transcriptions-and-recordings:
+    get:
+      summary: Fetch transcriptions and recordings for a specific workitem within a conversation
+      operationId: fetchTranscriptionsAndRecordings
+      tags:
+      - Conversations
+      - Workitems
+      description: 'Fetches transcriptions and recordings associated with a specific workitem within a conversation. This
+        endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.
+
+        '
+      parameters:
+      - in: path
+        name: conversationId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the conversation.
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem.
+      - in: query
+        name: createdAt
+        schema:
+          type: integer
+          format: int64
+        description: Creation timestamp of the workitem.
+      responses:
+        '200':
+          description: Transcriptions and recordings data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranscriptionsAndRecordingsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /analytics/api/conversationActivitySummary:
+    get:
+      summary: Fetch a summary of conversation activity (DEPRECATED)
+      operationId: fetchConversationActivitySummary
+      tags:
+      - Conversations
+      description: 'Fetches a summary of conversation activity, including categorized conversations and unread counts. This
+        endpoint is **DEPRECATED** and should be replaced by accessing the new v2 API via `sdk.getSchemaTypeClient()`.
+
+        '
+      responses:
+        '200':
+          description: A summary of conversation activity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationActivitySummaryResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Conversation:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Internal unique identifier (MongoDB ID).
+        conversationId:
+          type: string
+          description: Public unique identifier for the conversation.
+        conversationType:
+          type: string
+          description: The type of conversation (e.g., 'contact_based', 'shared_inbox_internal').
+        createdAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the conversation was created.
+        createdBy:
+          type: string
+          description: Identifier of the entity that created the conversation.
+        deletedAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) if the conversation was soft-deleted.
+        description:
+          type: string
+          description: An optional description for the conversation.
+        id:
+          type: string
+          description: Alias for conversationId.
+        modifiedAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the conversation was last modified.
+        modifiedBy:
+          type: string
+          description: Identifier of the entity that last modified the conversation.
+        name:
+          type: string
+          description: A human-readable name or subject for the conversation.
+        objectType:
+          type: string
+          description: The type of object, will always be 'conversation'.
+        parentEngagementId:
+          type: string
+          description: The ID of the parent engagement.
+        parentTicketId:
+          type: string
+          description: The ID of the parent ticket.
+        parentWorkitemId:
+          type: string
+          description: The ID of the parent workitem associated with this conversation.
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+          description: An array of participants involved in the conversation.
+        phoneNumber:
+          type: string
+          description: The primary phone number associated with the conversation.
+        sharedInboxId:
+          type: string
+          description: The ID of the shared inbox, if applicable.
+        sharedInboxName:
+          type: string
+          description: The name of the shared inbox.
+        tenantId:
+          type: string
+          description: The ID of the tenant the conversation belongs to.
+        topicName:
+          type: string
+          description: The name of the topic, if applicable.
+        totalCount:
+          type: integer
+          format: int32
+          description: Total number of messages/events in the conversation.
+        unreadCount:
+          type: integer
+          format: int32
+          description: Number of unread messages/events.
+    Participant:
+      type: object
+      properties:
+        addedBy:
+          type: string
+        archivedAt:
+          type: integer
+          format: int64
+        contact:
+          $ref: '#/components/schemas/ContactPartial'
+        firstName:
+          type: string
+        id:
+          type: string
+        joinedAt:
+          type: integer
+          format: int64
+        lastName:
+          type: string
+        notifyByEmail:
+          type: boolean
+        notifyBySMS:
+          type: boolean
+        notifyByVoice:
+          type: boolean
+        notifyByWeb:
+          type: boolean
+        phoneNumber:
+          type: string
+        type:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserParticipantDetails'
+    ContactPartial:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+    UserParticipantDetails:
+      type: object
+      properties:
+        _id:
+          type: string
+        addresses:
+          type: array
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        personalInboxCampaignId:
+          type: string
+        phoneNumber:
+          type: string
+        username:
+          type: string
+    PaginatedResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            type: object
+          description: Array of objects.
+    ConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+    ConversationByIdResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+          engagementData:
+            type: array
+            items:
+              $ref: '#/components/schemas/EngagementData'
+    ConversationsResponseWithContactArray:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/Workitem'
+              - $ref: '#/components/schemas/ContactArray'
+    ContactArray:
+      type: object
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+    TicketConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Conversation'
+    RecentConversationWorkitemEngagementsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/EngagementData'
+    TranscriptionsAndRecordingsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              type: object
+              properties:
+                callRecordingData:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConversationCallRecordingData'
+                summary:
+                  type: string
+                transcriptionMessages:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Message'
+                voicemailTranscript:
+                  type: string
+                workitemId:
+                  type: string
+    ConversationActivitySummary:
+      type: object
+      properties:
+        categories:
+          type: object
+          properties:
+            latestActivity:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+            unreadMessages:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+            unreadMissedCalls:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+            unreadVoicemails:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+          description: Categorized conversations by activity type.
+        totalUnreadCount:
+          type: integer
+          format: int32
+          description: Total number of unread items.
+        totalUnreadCountByFilter:
+          type: object
+          properties:
+            totalUnreadMessagesCount:
+              type: integer
+              format: int32
+            totalUnreadMissedCallsCount:
+              type: integer
+              format: int32
+            totalUnreadVoiceMailsCount:
+              type: integer
+              format: int32
+          description: Detailed unread counts by filter.
+    ConversationActivitySummaryResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConversationActivitySummary'
+    UnreadCounts:
+      type: object
+      properties:
+        internal:
+          type: integer
+          format: int32
+        mentions:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+        voicecalls:
+          type: integer
+          format: int32
+        voicemails:
+          type: integer
+          format: int32
+    ConversationFilterTabType:
+      type: string
+      enum:
+      - ALL
+      - ARCHIVED
+      - CALLS
+      - CALLS_AND_TEXTS
+      - CHANNELS
+      - DRAFTS
+      - EXTERNAL
+      - INCOMING_CALLS
+      - INTERNAL
+      - MENTIONS
+      - MISSED_CALLS
+      - OUTGOING_CALLS
+      - TEXTS
+      - UNREAD
+      - VOICEMAILS
+    Workitem:
+      type: object
+      properties:
+        workitemId:
+          type: string
+          description: Unique identifier for the workitem.
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the contact.
+    EngagementData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the engagement data.
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Unique identifier for the message.
+    ConversationCallRecordingData:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+security:
+- bearerAuth: []

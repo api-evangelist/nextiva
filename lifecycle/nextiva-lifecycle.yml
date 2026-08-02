@@ -1,0 +1,42 @@
+generated: '2026-07-31'
+method: searched
+source: https://status.nextiva.com/, https://developer.nextiva.com/nextiva/, openapi/*.yml
+versioning:
+  scheme: none
+  current: '1.0.0'
+  detail: >-
+    All five published OpenAPI contracts declare info.version 1.0.0 and carry no
+    version segment in their paths. The ReadMe hub exposes a single project
+    version, 1.0. No versioning or breaking-change policy is published.
+  docs: null
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  detail: >-
+    No deprecation policy, no Sunset (RFC 8594) or Deprecation header support,
+    and no operation in any of the five contracts is marked `deprecated: true`.
+sla:
+  url: https://www.nextiva.com/legal.html
+  uptime_target: 99.999%
+  detail: >-
+    Nextiva markets 99.999% uptime on its security and network pages; the
+    contractual service terms live under the legal document index
+    (/legal.html?doc=01 master terms, ?doc=02 UCaaS, ?doc=04 contact center).
+    No developer-facing API SLA document was found.
+status_page: https://status.nextiva.com/
+status_page_platform: Atlassian Statuspage
+changelog:
+  published: false
+  detail: >-
+    The ReadMe hub has no changelog section (/nextiva/changelog returns 404) and
+    no product release-notes page was found on nextiva.com. Docs pages carry
+    per-page `dateModified` timestamps only.
+deprecated_operations: []
+sdk_lifecycle:
+  note: >-
+    The publicly published npm SDK builds (ncx-core-sdk, ncx-web-sdk,
+    ncx-react-sdk, ncx-react-native-sdk) are all pre-1.0 dev-tagged releases
+    last published in 2024; the SDK installation guide now instructs developers
+    to install scoped @nextiva/* packages that are not present on the public npm
+    registry. See packages/nextiva-packages.yml.

@@ -1,0 +1,95 @@
+generated: '2026-07-31'
+method: searched
+source: https://developer.nextiva.com/nextiva/docs/sdk-installation
+notes: >-
+  Nextiva documents four frontend SDKs (Core, Web, React, React Native) for the
+  Nextiva Contact Center (NCX) platform. The install commands published in the
+  SDK Installation guide name SCOPED packages (@nextiva/ncx-web-sdk,
+  @nextiva/ncx-react-sdk, @nextiva/ncx-react-native-sdk) — all three return HTTP
+  404 from the public npm registry as of 2026-07-31, so the documented scoped
+  packages are private/restricted and require registry access from Nextiva.
+  Older UNSCOPED builds of the same SDKs (ncx-core-sdk, ncx-web-sdk,
+  ncx-react-sdk, ncx-react-native-sdk, ncx-sdk) ARE published publicly on npm
+  under the "nextiva" author with github.com/Nextiva repositories, and are
+  recorded below. No Nextiva server-side SDK was found on PyPI, Maven Central,
+  NuGet, pkg.go.dev, RubyGems, Packagist or crates.io.
+packages:
+- language: javascript
+  registry: npm
+  name: ncx-core-sdk
+  url: https://www.npmjs.com/package/ncx-core-sdk
+  install: npm install ncx-core-sdk
+  version: 0.0.3-dev.32
+  published: '2024-06-25'
+  official: true
+  status: prerelease
+  note: Core SDK — the framework-agnostic base the Web/React/React Native SDKs build on.
+- language: javascript
+  registry: npm
+  name: ncx-web-sdk
+  url: https://www.npmjs.com/package/ncx-web-sdk
+  install: npm install ncx-web-sdk
+  version: 0.0.1-dev.6
+  published: '2024-05-20'
+  repository: https://github.com/Nextiva/ncx-web-sdk
+  official: true
+  status: prerelease
+  note: Web SDK for browser applications. Docs now direct users to @nextiva/ncx-web-sdk.
+- language: javascript
+  registry: npm
+  name: ncx-react-sdk
+  url: https://www.npmjs.com/package/ncx-react-sdk
+  install: npm install ncx-react-sdk
+  version: 0.0.1-dev.10
+  published: '2024-06-14'
+  repository: https://github.com/Nextiva/ncx-sdk
+  official: true
+  status: prerelease
+  note: React SDK exposing the platform as React hooks. Docs now direct users to @nextiva/ncx-react-sdk.
+- language: javascript
+  registry: npm
+  name: ncx-react-native-sdk
+  url: https://www.npmjs.com/package/ncx-react-native-sdk
+  install: npm install ncx-react-native-sdk
+  version: 0.0.3-dev.21
+  published: '2024-06-14'
+  repository: https://github.com/Nextiva/ncx-sdk
+  official: true
+  status: prerelease
+  note: React Native SDK for mobile. Docs now direct users to @nextiva/ncx-react-native-sdk.
+- language: javascript
+  registry: npm
+  name: ncx-sdk
+  url: https://www.npmjs.com/package/ncx-sdk
+  install: npm install ncx-sdk
+  version: 1.5.8
+  published: '2024-04-16'
+  repository: https://github.com/Nextiva/ncx-sdk
+  license: MIT
+  official: true
+  note: Earliest published "Nextiva client SDk" package.
+documented_but_unpublished:
+- name: '@nextiva/ncx-web-sdk'
+  registry: npm
+  documented_in: https://developer.nextiva.com/nextiva/docs/sdk-installation
+  registry_status: 404
+  probed: '2026-07-31'
+- name: '@nextiva/ncx-react-sdk'
+  registry: npm
+  documented_in: https://developer.nextiva.com/nextiva/docs/sdk-installation
+  registry_status: 404
+  probed: '2026-07-31'
+- name: '@nextiva/ncx-react-native-sdk'
+  registry: npm
+  documented_in: https://developer.nextiva.com/nextiva/docs/sdk-installation
+  registry_status: 404
+  probed: '2026-07-31'
+registries_probed:
+- {registry: npm, result: hit}
+- {registry: pypi, result: none}
+- {registry: maven-central, result: none}
+- {registry: nuget, result: none}
+- {registry: pkg.go.dev, result: none}
+- {registry: rubygems, result: none}
+- {registry: packagist, result: none}
+- {registry: crates.io, result: none}

@@ -1,0 +1,97 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/nextiva-authentication-openapi.yml, openapi/nextiva-provider-authentication-openapi.yml,
+  openapi/nextiva-workitem-service-openapi.yml, openapi/nextiva-conversation-openapi.yml,
+  openapi/nextiva-sms-messaging-openapi.yml
+format: bespoke-json
+notes: >-
+  Nextiva does NOT use RFC 9457 problem+json. Two error envelopes are in use
+  across the five published contracts. Four of the five specs share a minimal
+  {code, message} object served as application/json; the Provider Token Service
+  (openapi 3.0.3) uses a richer ErrorResponse {type, message, code, timestamp}.
+  No published error-code registry was found in the developer docs, so the
+  concrete `code` values are undocumented — only the HTTP statuses and
+  descriptions below are declared. Nine of the eleven Workitem Service
+  operations and all ten Conversation operations declare ONLY a `default`
+  error response, so an agent cannot distinguish 401 from 404 from 500 on the
+  call-control and conversation surfaces from the contract alone.
+envelopes:
+- name: Error
+  media_type: application/json
+  fields:
+  - {name: code, type: string, description: Error code.}
+  - {name: message, type: string, description: Detailed error message.}
+  used_by:
+  - openapi/nextiva-authentication-openapi.yml
+  - openapi/nextiva-workitem-service-openapi.yml
+  - openapi/nextiva-conversation-openapi.yml
+  - openapi/nextiva-sms-messaging-openapi.yml
+- name: ErrorResponse
+  media_type: application/json
+  fields:
+  - {name: type, type: string, description: Error type classification, example: AUTHENTICATION_ERROR}
+  - {name: message, type: string, description: Human-readable error message}
+  - {name: code, type: string, description: Internal error code}
+  - {name: timestamp, type: string, description: Time the error occurred}
+  used_by:
+  - openapi/nextiva-provider-authentication-openapi.yml
+problems:
+- status: 401
+  title: Unauthorized - Invalid username or password
+  envelope: Error
+  source_operation: openapi/nextiva-authentication-openapi.yml#generateTokenWithAuthorities
+- status: 401
+  title: Unauthorized - Invalid or expired token
+  envelope: Error
+  source_operation: openapi/nextiva-authentication-openapi.yml#refreshToken
+  remediation: Re-authenticate with basic auth via generateTokenWithAuthorities to mint a fresh JWT.
+- status: 401
+  title: Authentication required
+  envelope: ErrorResponse
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#generateTokenWithAuthorities,
+    openapi/nextiva-provider-authentication-openapi.yml#generateToken, openapi/nextiva-provider-authentication-openapi.yml#authenticate,
+    openapi/nextiva-provider-authentication-openapi.yml#generatePortalToken
+- status: 403
+  title: Access denied
+  envelope: ErrorResponse
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#generateTokenWithAuthorities,
+    openapi/nextiva-provider-authentication-openapi.yml#generateToken, openapi/nextiva-provider-authentication-openapi.yml#authenticate,
+    openapi/nextiva-provider-authentication-openapi.yml#generatePortalToken
+  remediation: The authenticated user lacks the authority required for the requested token scope.
+- status: 400
+  title: Bad request - Invalid parameters
+  envelope: ErrorResponse
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#generatePortalToken
+- status: 400
+  title: Bad Request - Missing required Campaign ID or invalid parameters
+  envelope: Error
+  source_operation: openapi/nextiva-sms-messaging-openapi.yml#sendSmsMessage
+  remediation: Supply a valid campaignId on the SMS send payload.
+- status: 401
+  title: Unauthorized - Authentication required
+  envelope: Error
+  source_operation: openapi/nextiva-sms-messaging-openapi.yml#sendSmsMessage
+- status: 404
+  title: Workitem not found
+  envelope: none
+  note: Declared with no response body schema in the contract.
+  source_operation: openapi/nextiva-workitem-service-openapi.yml#fetchWorkitemById
+- status: 500
+  title: Internal server error
+  envelope: ErrorResponse
+  source_operation: openapi/nextiva-provider-authentication-openapi.yml#generateTokenWithAuthorities,
+    openapi/nextiva-provider-authentication-openapi.yml#generateToken, openapi/nextiva-provider-authentication-openapi.yml#authenticate,
+    openapi/nextiva-provider-authentication-openapi.yml#generatePortalToken
+- status: default
+  title: Unexpected error
+  envelope: Error
+  note: >-
+    The only error response declared on all ten Conversation operations and on
+    ten of the eleven Workitem Service operations, plus the fallback on the
+    Authentication and SMS specs.
+  source_operation: openapi/nextiva-conversation-openapi.yml#*, openapi/nextiva-workitem-service-openapi.yml#*
+gaps:
+- no published error-code reference in the developer docs
+- no application/problem+json (RFC 9457) media type
+- no 429 / rate-limit error declared in any contract
+- no retry or idempotency guidance for the POST call-control operations

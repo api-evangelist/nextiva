@@ -1,0 +1,108 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/*.yml, https://developer.nextiva.com/nextiva/docs/sdk-architecture
+docs: https://developer.nextiva.com/nextiva/docs/overview-of-sdks
+summary: >-
+  Cross-cutting request/response semantics for the Nextiva Contact Center REST
+  APIs, derived from the five published OpenAPI contracts and the SDK
+  architecture guide. Nextiva's documented developer story is SDK-first — the
+  four frontend SDKs wrap HTTP plus two WebSocket channels — so several
+  conventions that a REST-first provider would document (rate limiting,
+  idempotency, request tracing, versioning policy) are simply absent from the
+  contracts and the docs. Recorded here as gaps rather than invented.
+authentication:
+  style: JWT bearer, minted by basic auth
+  flow: >-
+    POST/GET the Provider Authentication API with HTTP basic credentials
+    (generateTokenWithAuthorities) to receive a JWT carrying the user's
+    authorities; send it as `Authorization: Bearer <token>` on every subsequent
+    call; exchange it via refreshToken before expiry.
+  header: 'Authorization: Bearer <jwt>'
+  sdk_note: >-
+    The SDKs attach the token to the HTTP header automatically after login, per
+    the SDK architecture guide.
+  artifact: authentication/nextiva-authentication.yml
+idempotency:
+  supported: false
+  evidence: >-
+    No Idempotency-Key parameter or header appears in any of the five published
+    contracts, and the developer docs contain no idempotency or safe-retry
+    guidance. The POST call-control operations (bridge, hold, hangup, mute,
+    dtmf, transfer) and sendSmsMessage are therefore not documented as safe to
+    retry.
+pagination:
+  supported: true
+  styles:
+  - style: offset-limit
+    params: [limit, offset]
+    used_by: [fetchConversations, fetchUnreadCounts]
+  - style: start-rows
+    params: [start, rows]
+    used_by: [fetchWorkitems, fetchConversationHistoryByParticipantId]
+  - style: page-number
+    params: [pageNumber, pageSize]
+    used_by: [fetchConversationById, fetchConversationWorkItemsByStatus, fetchTicketConversations]
+  - style: cursor
+    params: [cursor]
+    used_by: [fetchConversations]
+  response_component: PaginatedResponse
+  note: >-
+    Four different pagination idioms coexist across two specs; there is no single
+    provider-wide pagination contract.
+filtering:
+  style: query parameters
+  note: >-
+    The Conversation API exposes a large boolean filter surface on
+    fetchConversations (calls, messages, voicemails, missedCalls, inboundCalls,
+    outboundCalls, read, archived, draft, mentioned, latest,
+    includeCallRecordings, includeSummary, includeVoicemail,
+    includeParentEngagement, ignoreVoicemailTranscripts) plus `scope`, `tab`,
+    `filter`, `conversationType` and `participantIds`.
+request_tracing:
+  supported: false
+  evidence: no request-id / correlation-id header documented in any spec or docs page
+rate_limiting:
+  documented: false
+  evidence: >-
+    No rate-limit headers, no 429 response in any of the five contracts, and no
+    rate-limit page in the developer docs.
+versioning:
+  scheme: none-in-path
+  detail: >-
+    Paths are functional (/data/api/..., /users/api/..., /analytics/api/...,
+    /workflows/api/..., /provider/...) with no version segment. All five specs
+    declare info.version 1.0.0. The Conversation API exposes an optional
+    `version` query parameter on fetchConversations, the only version affordance
+    in the contracts.
+  artifact: lifecycle/nextiva-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  shapes: ['{code, message}', '{type, message, code, timestamp}']
+  rfc9457: false
+  artifact: errors/nextiva-problem-types.yml
+events:
+  transport: WebSocket
+  channels:
+  - name: events socket
+    purpose: real-time system events — incoming calls, status changes, offer notifications, live transcription
+  - name: analytics socket
+    purpose: supervisory data — users, queues, campaigns, outbound lists, workitem statistics
+  voice: >-
+    Bi-directional WebSocket signaling between browser and FreeSWITCH over the
+    mod_verto protocol; audio then flows over RTP.
+  artifact: asyncapi/nextiva-events.yml
+routing:
+  note: >-
+    Per the SDK architecture guide, after login the Provider Service returns a
+    token plus a payload with instructions on where to send future requests;
+    requests are then routed via the nextiva.io domain (currently thrio.io).
+    Regional domains for the US, Canada, Europe and India are described as being
+    established. The published OpenAPI `servers[]` all point at
+    https://api.nextiva.com (with https://api-staging.nextiva.com/provider on
+    the Provider Token Service).
+gaps:
+- no idempotency contract
+- no documented rate limits or 429 semantics
+- no request-id / correlation header
+- no API versioning policy
+- four competing pagination idioms
