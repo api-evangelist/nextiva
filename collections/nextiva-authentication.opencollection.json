@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Provider Authentication API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate token with user authorities (Login)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/provider/token-with-authorities",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Logs in a user with the provided username and password using Basic Authentication.\nReturns a JWT token containing the authenticated user's authorities and tenant location information.\nThis endpoint provides comprehensive token generation with full permission context.\n"
+        },
+        {
+          "info": {
+            "name": "Refresh authentication token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/provider/api/token-refresh",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Refreshes an existing authentication token. This endpoint uses the current valid token\n(typically sent as a Bearer token in the Authorization header) to obtain a new, updated token\nand location details.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

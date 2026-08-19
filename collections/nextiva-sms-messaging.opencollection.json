@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SMS Messaging API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SMS Messaging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send an outbound SMS message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/sms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an outbound SMS message to a specified recipient. This API allows for associating the message with a campaign, contact, or workitem.\n\n**Note on Inbound SMS:** This SDK primarily exposes APIs for *sending* SMS. Direct webhook configuration for *receiving* inbound SMS is typically handled internally by the Nextiva platform. Inbound SMS events are then consumed by the SDK as Workitems (e.g., `WorkitemTypes.InboundSMS`) via the SDK's event stream, not through a public API for webhook configura"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

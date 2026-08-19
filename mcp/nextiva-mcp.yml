@@ -3,11 +3,11 @@ method: derived
 status: candidate
 source: openapi/nextiva-authentication-openapi.yml, openapi/nextiva-conversation-openapi.yml, openapi/nextiva-provider-authentication-openapi.yml,
   openapi/nextiva-sms-messaging-openapi.yml, openapi/nextiva-workitem-service-openapi.yml
-note: Nextiva publishes NO hosted or remote MCP server. Searched the developer portal (developer.nextiva.com), the
-  nextiva GitHub organization, npm and the public MCP registries on 2026-07-31 — no result, and mcp.nextiva.com
-  does not resolve. This is a CANDIDATE tool surface derived mechanically from the operationIds in the five harvested
-  Nextiva OpenAPI contracts; no MCP endpoint is implied to exist. Every source_operation was verified against the
-  spec it names.
+note: Nextiva publishes NO hosted or remote MCP server. Searched the developer portal (developer.nextiva.com),
+  the nextiva GitHub organization, npm and the public MCP registries on 2026-07-31 — no result, and mcp.nextiva.com
+  does not resolve. This is a CANDIDATE tool surface derived mechanically from the operationIds in the
+  five harvested Nextiva OpenAPI contracts; no MCP endpoint is implied to exist. Every source_operation
+  was verified against the spec it names.
 server:
   name: nextiva
   transport: http
@@ -161,3 +161,9 @@ tools:
   method: POST
   path: /users/api/calls/{workitemId}/dtmf/{digit}
   source_operation: openapi/nextiva-workitem-service-openapi.yml#sendDtmfTones
+deployment:
+  mode: none
+  verified: derived
+  tools: 29
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,2272 @@
+{
+  "item": [
+    {
+      "id": "9480167a-3c2b-4857-80d9-cdc1bda9ecad",
+      "name": "Workitems",
+      "description": {
+        "content": "Operations related to Workitems (calls, messages, etc.)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e51cd47-bc97-46a1-a131-5b0b846e9e4b",
+          "name": "Fetch all workitems",
+          "request": {
+            "name": "Fetch all workitems",
+            "description": {
+              "content": "Fetch all workitems. This endpoint retrieves a paginated list of workitems, allowing filtering by query string, rows, start index, and additional query parameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "api",
+                "types",
+                "workitem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Query string for filtering workitems."
+                },
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "0",
+                  "description": "Pagination starting index."
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "true",
+                  "description": "Additional query parameters for filtering."
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "true",
+                  "description": "Additional query parameters for filtering."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dab2173a-fe36-4c7a-8f64-0da62472b2d5",
+              "name": "A paginated list of workitems.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "api",
+                    "types",
+                    "workitem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "key_0",
+                      "value": "5597.96439931284"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 2705,\n  \"total\": 1193,\n  \"objects\": [\n    {\n      \"_id\": \"string\",\n      \"workitemId\": \"string\",\n      \"state\": \"string\",\n      \"channelType\": \"string\",\n      \"type\": \"string\",\n      \"priority\": 1156,\n      \"agentUsername\": \"string\",\n      \"createdAt\": 4888,\n      \"modifiedAt\": 8109\n    },\n    {\n      \"_id\": \"string\",\n      \"workitemId\": \"string\",\n      \"state\": \"string\",\n      \"channelType\": \"string\",\n      \"type\": \"string\",\n      \"priority\": 7455,\n      \"agentUsername\": \"string\",\n      \"createdAt\": 1918,\n      \"modifiedAt\": 1547\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af09405a-c625-4bc6-96bd-3d19eea3aa9f",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "api",
+                    "types",
+                    "workitem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "key_0",
+                      "value": "5597.96439931284"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe1c401f-cd4f-43bc-aecb-176c5f34fe4e",
+          "name": "Fetch a specific workitem by ID",
+          "request": {
+            "name": "Fetch a specific workitem by ID",
+            "description": {
+              "content": "Fetch a specific workitem by ID. This endpoint retrieves a single workitem by its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "workitems",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the workitem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c71147e-9708-46a0-a42a-eacc8d273d19",
+              "name": "The requested workitem object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "workitems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54059a65-86f2-4ec8-9b03-a2bf44ca811b",
+              "name": "Workitem not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "workitems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42fa09cb-ecc5-49fa-ba07-7f51d2bc7348",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "workitems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbbc9c64-c86a-4d5b-a13b-eb3a9c43f64a",
+          "name": "Change the priority of a workitem",
+          "request": {
+            "name": "Change the priority of a workitem",
+            "description": {
+              "content": "Changes the priority of a workitem. This endpoint updates the priority of a specific workitem within the ACD system.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workflows",
+                "api",
+                "workitems",
+                ":workitemId",
+                "acd"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priority\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a574bfc-bad8-4ffc-946a-ea4589eac172",
+              "name": "Workitem priority successfully changed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workflows",
+                    "api",
+                    "workitems",
+                    ":workitemId",
+                    "acd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ade2b025-f68c-44fc-ab00-9ad4274b7d68",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workflows",
+                    "api",
+                    "workitems",
+                    ":workitemId",
+                    "acd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5c17744f-2e84-46eb-aa57-98ce3a88763c",
+      "name": "Call Management",
+      "description": {
+        "content": "Actions specific to managing calls within workitems",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1225a33-aa89-4209-a97b-708b7d1f735f",
+          "name": "Activates a call for a given workitem (Bridge)",
+          "request": {
+            "name": "Activates a call for a given workitem (Bridge)",
+            "description": {
+              "content": "Activates a call for a given workitem. This endpoint makes a POST request to bridge (activate) a call for the specified workitem.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "bridge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem (call) to activate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b194ef61-ee4a-4835-8cd7-a3f0c066e3bf",
+              "name": "Call successfully activated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "bridge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to activate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b50e95e-4911-4ec5-ac55-a0faca58134a",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "bridge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to activate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "540413f9-95c6-45da-a576-1b1b2dc1ef5c",
+          "name": "Puts a call on hold",
+          "request": {
+            "name": "Puts a call on hold",
+            "description": {
+              "content": "Puts a call on hold for a given workitem. This endpoint sends a POST request to place the specified workitem (call) on hold.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "hold"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem (call) to put on hold."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16d5c68d-da0a-4d1b-89f3-a728f23b4b33",
+              "name": "Call successfully put on hold.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "hold"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to put on hold."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a2c66ce-f06f-4d39-8d51-b9c4ec011966",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "hold"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to put on hold."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b8b3dff-9c4d-4414-9d35-b2f03c945dd3",
+          "name": "Ends a call",
+          "request": {
+            "name": "Ends a call",
+            "description": {
+              "content": "Ends a call associated with a given workitem. This endpoint sends a POST request to terminate the specified workitem (call).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "hangup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem (call) to hang up."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "896edcbb-2783-44fb-83a5-042328027033",
+              "name": "Call successfully ended.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "hangup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to hang up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52653564-d7f7-48f3-b944-07846a3d5479",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "hangup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to hang up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e6f2fca-2ce2-4ef3-baca-cae4a815727f",
+          "name": "Mutes a call",
+          "request": {
+            "name": "Mutes a call",
+            "description": {
+              "content": "Mutes a call associated with a given workitem. This endpoint sends a POST request to mute the specified workitem (call).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "mute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem (call) to mute."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba6bcf93-fa24-4818-a032-518fe96f7185",
+              "name": "Call successfully muted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "mute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to mute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdf9d38c-9f61-430b-bde4-2d2b14415189",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "mute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to mute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e45c5ae0-1df3-40da-b38d-5f2b30362d1a",
+          "name": "Unmutes a call",
+          "request": {
+            "name": "Unmutes a call",
+            "description": {
+              "content": "Unmutes a call associated with a given workitem. This endpoint sends a DELETE request to unmute the specified workitem (call).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "mute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem (call) to unmute."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad7d5814-7d7c-4f39-829e-ba5240c73b7d",
+              "name": "Call successfully unmuted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "mute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to unmute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b33e40f9-c4ad-4798-a3cd-bbee989e16a4",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "mute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to unmute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "daf419a2-59ca-48eb-b801-03a60a179af1",
+      "name": "Recording",
+      "description": {
+        "content": "Operations related to recording workitem interactions",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "a651f32a-7b60-44d3-aff6-0a684eef5ea6",
+      "name": "Transfers",
+      "description": {
+        "content": "Operations for transferring workitems",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4545d389-6fc6-4bfa-b281-8b03ec91ab76",
+          "name": "Transfers a workitem to another agent",
+          "request": {
+            "name": "Transfers a workitem to another agent",
+            "description": {
+              "content": "Transfers a workitem (e.g., an active call) to another specified agent. This allows for routing work to the appropriate personnel.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "usertransfer",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem to transfer."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Unique identifier of the target agent."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"workitemId\": \"<string>\",\n  \"eventName\": \"<string>\",\n  \"recording\": \"<string>\",\n  \"survey\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "944053d6-6e67-4c03-affd-bf6b0b6b4fea",
+              "name": "Workitem successfully transferred to agent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "usertransfer",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem to transfer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Unique identifier of the target agent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\",\n  \"workitemId\": \"<string>\",\n  \"eventName\": \"<string>\",\n  \"recording\": \"<string>\",\n  \"survey\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c215f54-a9bd-409d-ac32-950bc0d6faed",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "usertransfer",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem to transfer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Unique identifier of the target agent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\",\n  \"workitemId\": \"<string>\",\n  \"eventName\": \"<string>\",\n  \"recording\": \"<string>\",\n  \"survey\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56f13c41-79cb-4373-be6c-c0e3f49591fd",
+          "name": "Transfers a workitem to an inbox/queue",
+          "request": {
+            "name": "Transfers a workitem to an inbox/queue",
+            "description": {
+              "content": "Transfers a workitem (e.g., an active call or message) to a specified inbox or queue. This is used for routing work to a group of agents or a specific processing queue.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "queuetransfer",
+                ":inboxId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem to transfer."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inboxId",
+                  "description": "(Required) Unique identifier of the target inbox/queue."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inboxId\": \"<string>\",\n  \"workitemId\": \"<string>\",\n  \"eventName\": \"<string>\",\n  \"recording\": \"<string>\",\n  \"ringAll\": \"<boolean>\",\n  \"survey\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae05a565-7d55-405f-9851-7f31d45d9a8f",
+              "name": "Workitem successfully transferred to inbox/queue.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "queuetransfer",
+                    ":inboxId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem to transfer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inboxId",
+                      "description": "(Required) Unique identifier of the target inbox/queue."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inboxId\": \"<string>\",\n  \"workitemId\": \"<string>\",\n  \"eventName\": \"<string>\",\n  \"recording\": \"<string>\",\n  \"ringAll\": \"<boolean>\",\n  \"survey\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e774ccc0-07b4-4d4b-acac-a0489e072d85",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "queuetransfer",
+                    ":inboxId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem to transfer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inboxId",
+                      "description": "(Required) Unique identifier of the target inbox/queue."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inboxId\": \"<string>\",\n  \"workitemId\": \"<string>\",\n  \"eventName\": \"<string>\",\n  \"recording\": \"<string>\",\n  \"ringAll\": \"<boolean>\",\n  \"survey\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ba135dac-6797-48e9-aa08-36cf54fabdf8",
+      "name": "Conferences",
+      "description": {
+        "content": "Operations for managing conferences",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "7811dc34-b226-4187-9c13-eb9dee8ae074",
+      "name": "Email",
+      "description": {
+        "content": "Email-related workitem operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66e62ca4-e425-4b41-8343-f5364ec5c6de",
+          "name": "Sends an email response for a workitem",
+          "request": {
+            "name": "Sends an email response for a workitem",
+            "description": {
+              "content": "Sends an email response related to a specific workitem. This endpoint allows for responding to email-based workitems with a structured email.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "workitems",
+                ":workitemId",
+                "sendemailresponse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem associated with the email."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<email>\",\n  \"to\": \"<email>\",\n  \"subject\": \"<string>\",\n  \"bccAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bodyParts\": \"<object>\",\n  \"ccAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<long>\",\n  \"toAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85420e38-567f-497f-8636-bb43a08def44",
+              "name": "Email response successfully sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "workitems",
+                    ":workitemId",
+                    "sendemailresponse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem associated with the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<email>\",\n  \"to\": \"<email>\",\n  \"subject\": \"<string>\",\n  \"bccAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bodyParts\": \"<object>\",\n  \"ccAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<long>\",\n  \"toAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4d60cc2-7616-4102-9635-7e1c94cc12ae",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "workitems",
+                    ":workitemId",
+                    "sendemailresponse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem associated with the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<email>\",\n  \"to\": \"<email>\",\n  \"subject\": \"<string>\",\n  \"bccAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bodyParts\": \"<object>\",\n  \"ccAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<long>\",\n  \"toAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "af69d9bc-9d18-436e-97f8-57a6eef2721e",
+      "name": "Surveys",
+      "description": {
+        "content": "Survey management for workitems",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "39c07211-d755-49c2-8682-5a9b7a319bae",
+      "name": "DTMF",
+      "description": {
+        "content": "DTMF tone sending for calls",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc02180b-655e-4151-a04e-fc653dba3c2e",
+          "name": "Sends DTMF tones during a call",
+          "request": {
+            "name": "Sends DTMF tones during a call",
+            "description": {
+              "content": "Sends Dual-Tone Multi-Frequency (DTMF) tones during an active call associated with a workitem. This can be used for interacting with IVR systems or entering digits.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "calls",
+                ":workitemId",
+                "dtmf",
+                ":digit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem (call) to send DTMF tones to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digit",
+                  "description": "(Required) The DTMF digit(s) to send."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "178d9473-5ee4-46d4-9648-db9bcba98539",
+              "name": "DTMF tones sent successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "dtmf",
+                    ":digit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to send DTMF tones to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digit",
+                      "description": "(Required) The DTMF digit(s) to send."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"workitemId\": \"string\",\n  \"state\": \"string\",\n  \"channelType\": \"string\",\n  \"type\": \"string\",\n  \"priority\": 2593,\n  \"agentUsername\": \"string\",\n  \"createdAt\": 8646,\n  \"modifiedAt\": 6156\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16d1191f-9d31-43b9-bbf5-8501fd131db2",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "calls",
+                    ":workitemId",
+                    "dtmf",
+                    ":digit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem (call) to send DTMF tones to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digit",
+                      "description": "(Required) The DTMF digit(s) to send."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nextiva.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c38671b3-1d64-42db-8b9a-703e5e642bcd",
+    "name": "Workitem Service API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing and retrieving Workitem data and controlling call/interaction states.",
+      "type": "text/plain"
+    }
+  }
+}

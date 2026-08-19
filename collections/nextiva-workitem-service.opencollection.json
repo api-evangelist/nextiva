@@ -1,0 +1,336 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workitem Service API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workitems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch all workitems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/data/api/types/workitem",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query string for filtering workitems."
+              },
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Pagination starting index."
+              },
+              {
+                "name": "queryParams",
+                "value": "",
+                "type": "query",
+                "description": "Additional query parameters for filtering."
+              }
+            ]
+          },
+          "docs": "Fetch all workitems. This endpoint retrieves a paginated list of workitems, allowing filtering by query string, rows, start index, and additional query parameters.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch a specific workitem by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/users/api/workitems/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem."
+              }
+            ]
+          },
+          "docs": "Fetch a specific workitem by ID. This endpoint retrieves a single workitem by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Change the priority of a workitem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/workflows/api/workitems/:workitemId/acd",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the priority of a workitem. This endpoint updates the priority of a specific workitem within the ACD system.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Call Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activates a call for a given workitem (Bridge)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/bridge",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem (call) to activate."
+              }
+            ]
+          },
+          "docs": "Activates a call for a given workitem. This endpoint makes a POST request to bridge (activate) a call for the specified workitem.\n"
+        },
+        {
+          "info": {
+            "name": "Puts a call on hold",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/hold",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem (call) to put on hold."
+              }
+            ]
+          },
+          "docs": "Puts a call on hold for a given workitem. This endpoint sends a POST request to place the specified workitem (call) on hold.\n"
+        },
+        {
+          "info": {
+            "name": "Ends a call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/hangup",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem (call) to hang up."
+              }
+            ]
+          },
+          "docs": "Ends a call associated with a given workitem. This endpoint sends a POST request to terminate the specified workitem (call).\n"
+        },
+        {
+          "info": {
+            "name": "Mutes a call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/mute",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem (call) to mute."
+              }
+            ]
+          },
+          "docs": "Mutes a call associated with a given workitem. This endpoint sends a POST request to mute the specified workitem (call).\n"
+        },
+        {
+          "info": {
+            "name": "Unmutes a call",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/mute",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem (call) to unmute."
+              }
+            ]
+          },
+          "docs": "Unmutes a call associated with a given workitem. This endpoint sends a DELETE request to unmute the specified workitem (call).\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Email",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sends an email response for a workitem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/workitems/:workitemId/sendemailresponse",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem associated with the email."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an email response related to a specific workitem. This endpoint allows for responding to email-based workitems with a structured email.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Transfers a workitem to another agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/usertransfer/:userId",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem to transfer."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target agent."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfers a workitem (e.g., an active call) to another specified agent. This allows for routing work to the appropriate personnel.\n"
+        },
+        {
+          "info": {
+            "name": "Transfers a workitem to an inbox/queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/queuetransfer/:inboxId",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem to transfer."
+              },
+              {
+                "name": "inboxId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target inbox/queue."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfers a workitem (e.g., an active call or message) to a specified inbox or queue. This is used for routing work to a group of agents or a specific processing queue.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DTMF",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sends DTMF tones during a call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/users/api/calls/:workitemId/dtmf/:digit",
+            "params": [
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem (call) to send DTMF tones to."
+              },
+              {
+                "name": "digit",
+                "value": "",
+                "type": "path",
+                "description": "The DTMF digit(s) to send."
+              }
+            ]
+          },
+          "docs": "Sends Dual-Tone Multi-Frequency (DTMF) tones during an active call associated with a workitem. This can be used for interacting with IVR systems or entering digits.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

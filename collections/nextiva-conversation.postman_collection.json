@@ -1,0 +1,2728 @@
+{
+  "item": [
+    {
+      "id": "3aebfed1-2354-4c2a-8f6a-a4bf0522e03a",
+      "name": "Conversations",
+      "description": {
+        "content": "Operations related to conversations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11364676-c7a1-4af5-b0f1-80b773d4a935",
+          "name": "Fetch all conversations",
+          "request": {
+            "name": "Fetch all conversations",
+            "description": {
+              "content": "Fetch conversations. This endpoint retrieves a paginated list of all conversations, allowing filtering by rows and start index.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "api",
+                "types",
+                "conversation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "0",
+                  "description": "Pagination starting index."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e52f63b3-c327-4521-bd74-01c91de625f4",
+              "name": "A paginated list of conversations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "api",
+                    "types",
+                    "conversation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 139,\n  \"total\": 2718,\n  \"objects\": [\n    {\n      \"workitemId\": \"string\"\n    },\n    {\n      \"workitemId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9c43b85-0ab1-4e15-915b-b6f638dcfdbb",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "api",
+                    "types",
+                    "conversation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4ac94cc-fabc-43e8-a87a-4e3a82c71bbf",
+          "name": "Fetch a conversation by ID, including its associated workitems",
+          "request": {
+            "name": "Fetch a conversation by ID, including its associated workitems",
+            "description": {
+              "content": "Fetches a conversation by its ID, including its associated workitems. This endpoint allows for filtering by various parameters and different API versions.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "conversations",
+                ":conversationId",
+                "workitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<integer>",
+                  "description": "Cursor for pagination (for v2)."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCallRecordings",
+                  "value": "<boolean>",
+                  "description": "Whether to include call recordings."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeConversation",
+                  "value": "<boolean>",
+                  "description": "Whether to include conversation details."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeParentEngagement",
+                  "value": "<boolean>",
+                  "description": "Whether to include parent engagement details."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeSummary",
+                  "value": "<boolean>",
+                  "description": "Whether to include a summary."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeVoicemail",
+                  "value": "<boolean>",
+                  "description": "Whether to include voicemail."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of items per page (for v2)."
+                },
+                {
+                  "disabled": false,
+                  "key": "mentioned",
+                  "value": "<boolean>",
+                  "description": "Filter messages that mention the logged user."
+                },
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "100",
+                  "description": "Number of items per page (for v1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "0",
+                  "description": "Pagination starting index (for v1)."
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "v1",
+                  "description": "API version to use."
+                },
+                {
+                  "disabled": false,
+                  "key": "workitemId",
+                  "value": "<string>",
+                  "description": "Filter by workitem ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) Unique identifier of the conversation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cccf533a-1fd7-4099-92c5-344f43bb2372",
+              "name": "A conversation object by ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversations",
+                    ":conversationId",
+                    "workitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCallRecordings",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeConversation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeParentEngagement",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeSummary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeVoicemail",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "mentioned",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "version",
+                      "value": "v1"
+                    },
+                    {
+                      "key": "workitemId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6867,\n  \"total\": 9617,\n  \"objects\": [\n    {\n      \"workitemId\": \"string\"\n    },\n    {\n      \"workitemId\": \"string\"\n    }\n  ],\n  \"engagementData\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a967882-017f-4f75-90de-4368eacd9071",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversations",
+                    ":conversationId",
+                    "workitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeCallRecordings",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeConversation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeParentEngagement",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeSummary",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeVoicemail",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "mentioned",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "version",
+                      "value": "v1"
+                    },
+                    {
+                      "key": "workitemId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd4ea0e2-f2f9-49a9-b8ff-8ac483bca723",
+          "name": "Fetch workitems within a conversation by their status",
+          "request": {
+            "name": "Fetch workitems within a conversation by their status",
+            "description": {
+              "content": "Fetches a conversation's messages with workItems only in a given status. This allows filtering workitems within a specific conversation based on their status.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "conversations",
+                ":conversationId",
+                "workitems",
+                ":workItemStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "0",
+                  "description": "Pagination starting index."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) Unique identifier of the conversation."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workItemStatus",
+                  "description": "(Required) Status of the workitems to filter by (e.g., 'draft')."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "916533ff-14d2-4dc9-9166-5f7a6637859a",
+              "name": "A paginated list of workitems filtered by status within a conversation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversations",
+                    ":conversationId",
+                    "workitems",
+                    ":workItemStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workItemStatus",
+                      "description": "(Required) Status of the workitems to filter by (e.g., 'draft')."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 139,\n  \"total\": 2718,\n  \"objects\": [\n    {\n      \"workitemId\": \"string\"\n    },\n    {\n      \"workitemId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33bcd6e4-85a3-4f71-b20f-002c57bebd7d",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversations",
+                    ":conversationId",
+                    "workitems",
+                    ":workItemStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "rows",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workItemStatus",
+                      "description": "(Required) Status of the workitems to filter by (e.g., 'draft')."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5164d527-138e-4343-86c4-0e438a7de7d9",
+          "name": "Fetch recent conversation workitems for a campaign",
+          "request": {
+            "name": "Fetch recent conversation workitems for a campaign",
+            "description": {
+              "content": "Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "campaigns",
+                ":campaignId",
+                "recentconversationworkitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "<boolean>",
+                  "description": "Filter archived conversations."
+                },
+                {
+                  "disabled": false,
+                  "key": "calls",
+                  "value": "<boolean>",
+                  "description": "Filter calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "conversationType",
+                  "value": "<string>",
+                  "description": "Filter by conversation type."
+                },
+                {
+                  "disabled": false,
+                  "key": "draft",
+                  "value": "<boolean>",
+                  "description": "Filter draft conversations."
+                },
+                {
+                  "disabled": false,
+                  "key": "inboundCalls",
+                  "value": "<boolean>",
+                  "description": "Filter inbound calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "latest",
+                  "value": "<boolean>",
+                  "description": "Filter latest conversations."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "mentioned",
+                  "value": "<boolean>",
+                  "description": "Filter messages that have mentions."
+                },
+                {
+                  "disabled": false,
+                  "key": "messages",
+                  "value": "<boolean>",
+                  "description": "Filter messages."
+                },
+                {
+                  "disabled": false,
+                  "key": "missedCalls",
+                  "value": "<boolean>",
+                  "description": "Filter missed calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "outboundCalls",
+                  "value": "<boolean>",
+                  "description": "Filter outbound calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "read",
+                  "value": "<boolean>",
+                  "description": "Filter read messages."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Filter by scope."
+                },
+                {
+                  "disabled": false,
+                  "key": "totalUnread",
+                  "value": "<boolean>",
+                  "description": "Include unread count for each conversation."
+                },
+                {
+                  "disabled": false,
+                  "key": "voicemails",
+                  "value": "<boolean>",
+                  "description": "Filter voicemails."
+                },
+                {
+                  "disabled": false,
+                  "key": "workitem",
+                  "value": "<string>",
+                  "description": "Filter by workitem ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "campaignId",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59df4565-112d-410f-8a5d-be5a96a68e37",
+              "name": "A paginated list of conversations related to a campaign.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "campaigns",
+                    ":campaignId",
+                    "recentconversationworkitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "calls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "conversationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "draft",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "latest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "mentioned",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "missedCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "outboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "totalUnread",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "voicemails",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "workitem",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignId",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 139,\n  \"total\": 2718,\n  \"objects\": [\n    {\n      \"workitemId\": \"string\"\n    },\n    {\n      \"workitemId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e577b79-d087-4d04-abff-70e1ebb6014b",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "campaigns",
+                    ":campaignId",
+                    "recentconversationworkitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "calls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "conversationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "draft",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "latest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "mentioned",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "missedCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "outboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "totalUnread",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "voicemails",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "workitem",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignId",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "558c6517-2683-4c97-8bbd-697a76087d13",
+          "name": "Fetch recent conversation workitem engagements",
+          "request": {
+            "name": "Fetch recent conversation workitem engagements",
+            "description": {
+              "content": "Fetches recent conversation workitem engagements based on provided parameters like cursor, filter type, and limit. This helps in paginating and filtering recent conversation activity.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "recentConversationWorkitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<integer>",
+                  "description": "Cursor for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter type for conversations."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreVoicemailTranscripts",
+                  "value": "<boolean>",
+                  "description": "Whether to ignore voicemail transcripts."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "tab",
+                  "value": "<string>",
+                  "description": "Tab filter for conversations."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60b3c47c-a649-4575-a2f8-d06970ee7f05",
+              "name": "A paginated list of recent conversation workitem engagements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "recentConversationWorkitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ignoreVoicemailTranscripts",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tab",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 645,\n  \"total\": 1072,\n  \"objects\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4edbefad-27c3-4ccd-b2d7-6be590eaf353",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "recentConversationWorkitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ignoreVoicemailTranscripts",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tab",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad06b2d1-74f1-4f97-ad21-e4fc3577db5e",
+          "name": "Fetch conversation history by participant ID",
+          "request": {
+            "name": "Fetch conversation history by participant ID",
+            "description": {
+              "content": "Fetches conversation messages between the logged user and the participants specified in the `participantIds` array. This endpoint provides paginated history for specific participants.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "conversations",
+                "workitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "Number of items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "participantIds",
+                  "value": "<string>",
+                  "description": "IDs of the participants to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "participantIds",
+                  "value": "<string>",
+                  "description": "IDs of the participants to filter by."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "684b4a95-7a8f-41c3-b6f0-f915c2750560",
+              "name": "A paginated list of conversation workitems for the specified participants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversations",
+                    "workitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "participantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participantIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 139,\n  \"total\": 2718,\n  \"objects\": [\n    {\n      \"workitemId\": \"string\"\n    },\n    {\n      \"workitemId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9eb611ef-563a-4097-a4ab-d7d5db6d458c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversations",
+                    "workitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "participantIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participantIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6e48dd7-8011-4269-b411-1379a5e77e13",
+          "name": "Fetch conversations associated with a ticket",
+          "request": {
+            "name": "Fetch conversations associated with a ticket",
+            "description": {
+              "content": "Fetches all conversations associated with a specific ticket ID. This provides a paginated list of conversations relevant to a particular support ticket.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "tickets",
+                ":ticketId",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) Unique identifier of the ticket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7b05740-ac6a-44fa-98e6-3bb637880138",
+              "name": "A paginated list of conversations related to a specific ticket.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "tickets",
+                    ":ticketId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) Unique identifier of the ticket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6124,\n  \"total\": 9092,\n  \"objects\": [\n    {\n      \"_id\": \"string\",\n      \"conversationId\": \"string\",\n      \"conversationType\": \"string\",\n      \"createdAt\": 878,\n      \"createdBy\": \"string\",\n      \"deletedAt\": 4088,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"modifiedAt\": 8197,\n      \"modifiedBy\": \"string\",\n      \"name\": \"string\",\n      \"objectType\": \"string\",\n      \"parentEngagementId\": \"string\",\n      \"parentTicketId\": \"string\",\n      \"parentWorkitemId\": \"string\",\n      \"participants\": [\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 1605,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 356,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": false,\n          \"notifyBySMS\": true,\n          \"notifyByVoice\": true,\n          \"notifyByWeb\": false,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 3062,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 3000,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": false,\n          \"notifyBySMS\": true,\n          \"notifyByVoice\": true,\n          \"notifyByWeb\": false,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"phoneNumber\": \"string\",\n      \"sharedInboxId\": \"string\",\n      \"sharedInboxName\": \"string\",\n      \"tenantId\": \"string\",\n      \"topicName\": \"string\",\n      \"totalCount\": 7850,\n      \"unreadCount\": 3165\n    },\n    {\n      \"_id\": \"string\",\n      \"conversationId\": \"string\",\n      \"conversationType\": \"string\",\n      \"createdAt\": 9438,\n      \"createdBy\": \"string\",\n      \"deletedAt\": 1014,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"modifiedAt\": 1028,\n      \"modifiedBy\": \"string\",\n      \"name\": \"string\",\n      \"objectType\": \"string\",\n      \"parentEngagementId\": \"string\",\n      \"parentTicketId\": \"string\",\n      \"parentWorkitemId\": \"string\",\n      \"participants\": [\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 6746,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 6205,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": false,\n          \"notifyBySMS\": false,\n          \"notifyByVoice\": true,\n          \"notifyByWeb\": true,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 244,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 160,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": false,\n          \"notifyBySMS\": true,\n          \"notifyByVoice\": false,\n          \"notifyByWeb\": true,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"phoneNumber\": \"string\",\n      \"sharedInboxId\": \"string\",\n      \"sharedInboxName\": \"string\",\n      \"tenantId\": \"string\",\n      \"topicName\": \"string\",\n      \"totalCount\": 4183,\n      \"unreadCount\": 1183\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0bdb48e-831a-4845-afaa-e9f0755a7c58",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "tickets",
+                    ":ticketId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) Unique identifier of the ticket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e069ec6-205c-413e-a267-52786bd67664",
+          "name": "Fetch unread conversation counts",
+          "request": {
+            "name": "Fetch unread conversation counts",
+            "description": {
+              "content": "Fetches unread counts for various types of conversations. This endpoint provides a summary of internal, mentions, total, voice calls, and voicemails unread counts.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "api",
+                "types",
+                "conversation",
+                "unread",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e125a75b-b079-40b4-9c63-072068062603",
+              "name": "Unread counts for conversations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "api",
+                    "types",
+                    "conversation",
+                    "unread",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"internal\": 1969,\n  \"mentions\": 1447,\n  \"total\": 4777,\n  \"voicecalls\": 5454,\n  \"voicemails\": 3497\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41fc8cfb-18a4-4192-a9e8-9215899ddd30",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "api",
+                    "types",
+                    "conversation",
+                    "unread",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f063c73-621e-4523-b6c1-e9001f4fc8b8",
+          "name": "Fetch transcriptions and recordings for a specific workitem within a conversation",
+          "request": {
+            "name": "Fetch transcriptions and recordings for a specific workitem within a conversation",
+            "description": {
+              "content": "Fetches transcriptions and recordings associated with a specific workitem within a conversation. This endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "types",
+                "conversation",
+                ":conversationId",
+                "workitems",
+                ":workitemId",
+                "transcriptions-and-recordings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "createdAt",
+                  "value": "<long>",
+                  "description": "Creation timestamp of the workitem."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) Unique identifier of the conversation."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d4b6e16-ef3d-4da3-ac19-ee0ff2c1721a",
+              "name": "Transcriptions and recordings data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "types",
+                    "conversation",
+                    ":conversationId",
+                    "workitems",
+                    ":workitemId",
+                    "transcriptions-and-recordings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "createdAt",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3905,\n  \"total\": 7826,\n  \"objects\": [\n    {\n      \"callRecordingData\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"summary\": \"string\",\n      \"transcriptionMessages\": [\n        {\n          \"messageId\": \"string\"\n        },\n        {\n          \"messageId\": \"string\"\n        }\n      ],\n      \"voicemailTranscript\": \"string\",\n      \"workitemId\": \"string\"\n    },\n    {\n      \"callRecordingData\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"summary\": \"string\",\n      \"transcriptionMessages\": [\n        {\n          \"messageId\": \"string\"\n        },\n        {\n          \"messageId\": \"string\"\n        }\n      ],\n      \"voicemailTranscript\": \"string\",\n      \"workitemId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "680582b6-7e63-4275-9ea4-645d272931b3",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "types",
+                    "conversation",
+                    ":conversationId",
+                    "workitems",
+                    ":workitemId",
+                    "transcriptions-and-recordings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "createdAt",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60cfaa9b-7546-4866-bb32-62128c202b91",
+          "name": "Fetch a summary of conversation activity (DEPRECATED)",
+          "request": {
+            "name": "Fetch a summary of conversation activity (DEPRECATED)",
+            "description": {
+              "content": "Fetches a summary of conversation activity, including categorized conversations and unread counts. This endpoint is **DEPRECATED** and should be replaced by accessing the new v2 API via `sdk.getSchemaTypeClient()`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "conversationActivitySummary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "492587f1-dfb8-4b5f-95b7-500149eddff7",
+              "name": "A summary of conversation activity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversationActivitySummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"categories\": {\n      \"latestActivity\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 465,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 1383,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 9078,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 4050,\n          \"unreadCount\": 8103\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 6735,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 4184,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 739,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 9651,\n          \"unreadCount\": 1870\n        }\n      ],\n      \"unreadMessages\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 7350,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 8918,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 377,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 9835,\n          \"unreadCount\": 6413\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 4475,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 8765,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 5638,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 2735,\n          \"unreadCount\": 3635\n        }\n      ],\n      \"unreadMissedCalls\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 5312,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 6916,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 7756,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 1262,\n          \"unreadCount\": 3344\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 4781,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 6788,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 1247,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 382,\n          \"unreadCount\": 7303\n        }\n      ],\n      \"unreadVoicemails\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 6945,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 1092,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 452,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 9929,\n          \"unreadCount\": 4199\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 5181,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 8712,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 9582,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 489,\n          \"unreadCount\": 5755\n        }\n      ]\n    },\n    \"totalUnreadCount\": 5011,\n    \"totalUnreadCountByFilter\": {\n      \"totalUnreadMessagesCount\": 1489,\n      \"totalUnreadMissedCallsCount\": 2254,\n      \"totalUnreadVoiceMailsCount\": 3131\n    }\n  },\n  {\n    \"categories\": {\n      \"latestActivity\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 2607,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 592,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 9314,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 1222,\n          \"unreadCount\": 2861\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 6932,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 1385,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 6827,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 3368,\n          \"unreadCount\": 9264\n        }\n      ],\n      \"unreadMessages\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 8292,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 7472,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 1361,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 8429,\n          \"unreadCount\": 6146\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 1175,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 4832,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 3689,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 9089,\n          \"unreadCount\": 9840\n        }\n      ],\n      \"unreadMissedCalls\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 3014,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 5971,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 393,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 5134,\n          \"unreadCount\": 6206\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 2330,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 975,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 2124,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 5397,\n          \"unreadCount\": 4558\n        }\n      ],\n      \"unreadVoicemails\": [\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 8870,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 1339,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 4341,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 2049,\n          \"unreadCount\": 7561\n        },\n        {\n          \"_id\": \"string\",\n          \"conversationId\": \"string\",\n          \"conversationType\": \"string\",\n          \"createdAt\": 6465,\n          \"createdBy\": \"string\",\n          \"deletedAt\": 8817,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"modifiedAt\": 6689,\n          \"modifiedBy\": \"string\",\n          \"name\": \"string\",\n          \"objectType\": \"string\",\n          \"parentEngagementId\": \"string\",\n          \"parentTicketId\": \"string\",\n          \"parentWorkitemId\": \"string\",\n          \"participants\": [\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"addedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"archivedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"contact\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"joinedAt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyBySMS\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByVoice\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"notifyByWeb\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phoneNumber\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"phoneNumber\": \"string\",\n          \"sharedInboxId\": \"string\",\n          \"sharedInboxName\": \"string\",\n          \"tenantId\": \"string\",\n          \"topicName\": \"string\",\n          \"totalCount\": 3033,\n          \"unreadCount\": 5988\n        }\n      ]\n    },\n    \"totalUnreadCount\": 4564,\n    \"totalUnreadCountByFilter\": {\n      \"totalUnreadMessagesCount\": 1274,\n      \"totalUnreadMissedCallsCount\": 2394,\n      \"totalUnreadVoiceMailsCount\": 2271\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37278791-ef38-410e-ae73-6b68a6afddf2",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "conversationActivitySummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "db791d7e-88ab-41cd-a6bf-6f4bb8e5ad19",
+      "name": "Campaigns",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9cc343f4-fa8c-4c7a-8fcf-ccebeb339f2b",
+          "name": "Fetch recent conversation workitems for a campaign",
+          "request": {
+            "name": "Fetch recent conversation workitems for a campaign",
+            "description": {
+              "content": "Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "campaigns",
+                ":campaignId",
+                "recentconversationworkitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "<boolean>",
+                  "description": "Filter archived conversations."
+                },
+                {
+                  "disabled": false,
+                  "key": "calls",
+                  "value": "<boolean>",
+                  "description": "Filter calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "conversationType",
+                  "value": "<string>",
+                  "description": "Filter by conversation type."
+                },
+                {
+                  "disabled": false,
+                  "key": "draft",
+                  "value": "<boolean>",
+                  "description": "Filter draft conversations."
+                },
+                {
+                  "disabled": false,
+                  "key": "inboundCalls",
+                  "value": "<boolean>",
+                  "description": "Filter inbound calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "latest",
+                  "value": "<boolean>",
+                  "description": "Filter latest conversations."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "mentioned",
+                  "value": "<boolean>",
+                  "description": "Filter messages that have mentions."
+                },
+                {
+                  "disabled": false,
+                  "key": "messages",
+                  "value": "<boolean>",
+                  "description": "Filter messages."
+                },
+                {
+                  "disabled": false,
+                  "key": "missedCalls",
+                  "value": "<boolean>",
+                  "description": "Filter missed calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "outboundCalls",
+                  "value": "<boolean>",
+                  "description": "Filter outbound calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "read",
+                  "value": "<boolean>",
+                  "description": "Filter read messages."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Filter by scope."
+                },
+                {
+                  "disabled": false,
+                  "key": "totalUnread",
+                  "value": "<boolean>",
+                  "description": "Include unread count for each conversation."
+                },
+                {
+                  "disabled": false,
+                  "key": "voicemails",
+                  "value": "<boolean>",
+                  "description": "Filter voicemails."
+                },
+                {
+                  "disabled": false,
+                  "key": "workitem",
+                  "value": "<string>",
+                  "description": "Filter by workitem ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "campaignId",
+                  "description": "(Required) Unique identifier of the campaign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fc7bbda-9a36-4907-88e2-37e0194c8886",
+              "name": "A paginated list of conversations related to a campaign.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "campaigns",
+                    ":campaignId",
+                    "recentconversationworkitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "calls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "conversationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "draft",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "latest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "mentioned",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "missedCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "outboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "totalUnread",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "voicemails",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "workitem",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignId",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 139,\n  \"total\": 2718,\n  \"objects\": [\n    {\n      \"workitemId\": \"string\"\n    },\n    {\n      \"workitemId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd9afd0c-a414-4bbb-8164-19cd835c71c3",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "campaigns",
+                    ":campaignId",
+                    "recentconversationworkitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "calls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "conversationType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "draft",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "latest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "mentioned",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "messages",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "missedCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "outboundCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "totalUnread",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "voicemails",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "workitem",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignId",
+                      "description": "(Required) Unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7d1d7eda-134c-41c7-bef8-204e9a7650ab",
+      "name": "Tickets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "438ad602-78c9-460e-a56f-f595069c5aaf",
+          "name": "Fetch conversations associated with a ticket",
+          "request": {
+            "name": "Fetch conversations associated with a ticket",
+            "description": {
+              "content": "Fetches all conversations associated with a specific ticket ID. This provides a paginated list of conversations relevant to a particular support ticket.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "tickets",
+                ":ticketId",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) Unique identifier of the ticket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f143a986-81de-4350-8e65-be4e51541e75",
+              "name": "A paginated list of conversations related to a specific ticket.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "tickets",
+                    ":ticketId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) Unique identifier of the ticket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6043,\n  \"total\": 9655,\n  \"objects\": [\n    {\n      \"_id\": \"string\",\n      \"conversationId\": \"string\",\n      \"conversationType\": \"string\",\n      \"createdAt\": 6580,\n      \"createdBy\": \"string\",\n      \"deletedAt\": 2238,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"modifiedAt\": 6207,\n      \"modifiedBy\": \"string\",\n      \"name\": \"string\",\n      \"objectType\": \"string\",\n      \"parentEngagementId\": \"string\",\n      \"parentTicketId\": \"string\",\n      \"parentWorkitemId\": \"string\",\n      \"participants\": [\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 2265,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 2077,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": true,\n          \"notifyBySMS\": false,\n          \"notifyByVoice\": false,\n          \"notifyByWeb\": true,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 5988,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 7454,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": true,\n          \"notifyBySMS\": false,\n          \"notifyByVoice\": true,\n          \"notifyByWeb\": true,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"phoneNumber\": \"string\",\n      \"sharedInboxId\": \"string\",\n      \"sharedInboxName\": \"string\",\n      \"tenantId\": \"string\",\n      \"topicName\": \"string\",\n      \"totalCount\": 1856,\n      \"unreadCount\": 3499\n    },\n    {\n      \"_id\": \"string\",\n      \"conversationId\": \"string\",\n      \"conversationType\": \"string\",\n      \"createdAt\": 1639,\n      \"createdBy\": \"string\",\n      \"deletedAt\": 2661,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"modifiedAt\": 8688,\n      \"modifiedBy\": \"string\",\n      \"name\": \"string\",\n      \"objectType\": \"string\",\n      \"parentEngagementId\": \"string\",\n      \"parentTicketId\": \"string\",\n      \"parentWorkitemId\": \"string\",\n      \"participants\": [\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 5914,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 258,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": false,\n          \"notifyBySMS\": false,\n          \"notifyByVoice\": true,\n          \"notifyByWeb\": false,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"addedBy\": \"string\",\n          \"archivedAt\": 4907,\n          \"contact\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"firstName\": \"string\",\n          \"id\": \"string\",\n          \"joinedAt\": 5837,\n          \"lastName\": \"string\",\n          \"notifyByEmail\": false,\n          \"notifyBySMS\": false,\n          \"notifyByVoice\": false,\n          \"notifyByWeb\": true,\n          \"phoneNumber\": \"string\",\n          \"type\": \"string\",\n          \"user\": {\n            \"_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"personalInboxCampaignId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"username\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"phoneNumber\": \"string\",\n      \"sharedInboxId\": \"string\",\n      \"sharedInboxName\": \"string\",\n      \"tenantId\": \"string\",\n      \"topicName\": \"string\",\n      \"totalCount\": 677,\n      \"unreadCount\": 7720\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de98ea76-c14b-4e58-bc3f-6e1f9c2884c3",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "tickets",
+                    ":ticketId",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) Unique identifier of the ticket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9a89ab3c-d826-48b7-a537-6fe8173a81da",
+      "name": "Workitems",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "008eb018-95cc-4e87-9c66-5010ad9b15d5",
+          "name": "Fetch transcriptions and recordings for a specific workitem within a conversation",
+          "request": {
+            "name": "Fetch transcriptions and recordings for a specific workitem within a conversation",
+            "description": {
+              "content": "Fetches transcriptions and recordings associated with a specific workitem within a conversation. This endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "api",
+                "types",
+                "conversation",
+                ":conversationId",
+                "workitems",
+                ":workitemId",
+                "transcriptions-and-recordings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "createdAt",
+                  "value": "<long>",
+                  "description": "Creation timestamp of the workitem."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "conversationId",
+                  "description": "(Required) Unique identifier of the conversation."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workitemId",
+                  "description": "(Required) Unique identifier of the workitem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7cf4f596-36d2-4565-8850-f71c4741487e",
+              "name": "Transcriptions and recordings data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "types",
+                    "conversation",
+                    ":conversationId",
+                    "workitems",
+                    ":workitemId",
+                    "transcriptions-and-recordings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "createdAt",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7443,\n  \"total\": 3537,\n  \"objects\": [\n    {\n      \"callRecordingData\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"summary\": \"string\",\n      \"transcriptionMessages\": [\n        {\n          \"messageId\": \"string\"\n        },\n        {\n          \"messageId\": \"string\"\n        }\n      ],\n      \"voicemailTranscript\": \"string\",\n      \"workitemId\": \"string\"\n    },\n    {\n      \"callRecordingData\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\"\n        }\n      ],\n      \"summary\": \"string\",\n      \"transcriptionMessages\": [\n        {\n          \"messageId\": \"string\"\n        },\n        {\n          \"messageId\": \"string\"\n        }\n      ],\n      \"voicemailTranscript\": \"string\",\n      \"workitemId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f659f3e-5ad8-4998-8f64-02bc246ef001",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "api",
+                    "types",
+                    "conversation",
+                    ":conversationId",
+                    "workitems",
+                    ":workitemId",
+                    "transcriptions-and-recordings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "createdAt",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "conversationId",
+                      "description": "(Required) Unique identifier of the conversation."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workitemId",
+                      "description": "(Required) Unique identifier of the workitem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nextiva.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2f9ea789-48ab-45a8-b1ee-6555cfd8b78d",
+    "name": "Conversation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing and retrieving conversation data.",
+      "type": "text/plain"
+    }
+  }
+}

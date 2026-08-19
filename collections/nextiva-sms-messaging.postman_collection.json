@@ -1,0 +1,262 @@
+{
+  "item": [
+    {
+      "id": "d4148506-f444-49d8-8540-187833e8f03b",
+      "name": "SMS Messaging",
+      "description": {
+        "content": "Operations for sending and managing SMS messages.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7f474cd-9a52-4b2c-aa74-fc97971f592c",
+          "name": "Send an outbound SMS message",
+          "request": {
+            "name": "Send an outbound SMS message",
+            "description": {
+              "content": "Sends an outbound SMS message to a specified recipient. This API allows for associating the message with a campaign, contact, or workitem.\n\n**Note on Inbound SMS:** This SDK primarily exposes APIs for *sending* SMS. Direct webhook configuration for *receiving* inbound SMS is typically handled internally by the Nextiva platform. Inbound SMS events are then consumed by the SDK as Workitems (e.g., `WorkitemTypes.InboundSMS`) via the SDK's event stream, not through a public API for webhook configuration.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "api",
+                "sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": \"<string>\",\n  \"message\": \"<string>\",\n  \"campaignId\": \"<string>\",\n  \"contactId\": \"<string>\",\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"file\": \"<binary>\",\n  \"files\": [\n    \"<binary>\",\n    \"<binary>\"\n  ],\n  \"force\": \"<boolean>\",\n  \"from\": \"<string>\",\n  \"groupSMSParentTicketId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"nonAssignedAgentReply\": \"<boolean>\",\n  \"option\": \"<string>\",\n  \"ticketId\": \"<string>\",\n  \"toNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workitemId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "436e1c8f-0cc2-41e5-9973-b9d8fdfd6c00",
+              "name": "SMS message successfully sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": \"<string>\",\n  \"message\": \"<string>\",\n  \"campaignId\": \"<string>\",\n  \"contactId\": \"<string>\",\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"file\": \"<binary>\",\n  \"files\": [\n    \"<binary>\",\n    \"<binary>\"\n  ],\n  \"force\": \"<boolean>\",\n  \"from\": \"<string>\",\n  \"groupSMSParentTicketId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"nonAssignedAgentReply\": \"<boolean>\",\n  \"option\": \"<string>\",\n  \"ticketId\": \"<string>\",\n  \"toNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workitemId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"canDial\": false,\n  \"consentType\": 1356\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db388781-18ac-404b-b17c-ba4f7417c502",
+              "name": "Bad Request - Missing required Campaign ID or invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": \"<string>\",\n  \"message\": \"<string>\",\n  \"campaignId\": \"<string>\",\n  \"contactId\": \"<string>\",\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"file\": \"<binary>\",\n  \"files\": [\n    \"<binary>\",\n    \"<binary>\"\n  ],\n  \"force\": \"<boolean>\",\n  \"from\": \"<string>\",\n  \"groupSMSParentTicketId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"nonAssignedAgentReply\": \"<boolean>\",\n  \"option\": \"<string>\",\n  \"ticketId\": \"<string>\",\n  \"toNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workitemId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c62dae4-d4ea-45cf-92f0-7d5112e261ae",
+              "name": "Unauthorized - Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": \"<string>\",\n  \"message\": \"<string>\",\n  \"campaignId\": \"<string>\",\n  \"contactId\": \"<string>\",\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"file\": \"<binary>\",\n  \"files\": [\n    \"<binary>\",\n    \"<binary>\"\n  ],\n  \"force\": \"<boolean>\",\n  \"from\": \"<string>\",\n  \"groupSMSParentTicketId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"nonAssignedAgentReply\": \"<boolean>\",\n  \"option\": \"<string>\",\n  \"ticketId\": \"<string>\",\n  \"toNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workitemId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d047ef53-c670-4ab4-bcfc-80c7ee9bbf45",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "api",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": \"<string>\",\n  \"message\": \"<string>\",\n  \"campaignId\": \"<string>\",\n  \"contactId\": \"<string>\",\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"file\": \"<binary>\",\n  \"files\": [\n    \"<binary>\",\n    \"<binary>\"\n  ],\n  \"force\": \"<boolean>\",\n  \"from\": \"<string>\",\n  \"groupSMSParentTicketId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"nonAssignedAgentReply\": \"<boolean>\",\n  \"option\": \"<string>\",\n  \"ticketId\": \"<string>\",\n  \"toNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workitemId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nextiva.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f7ddb17d-6daa-4c05-9b1c-6eb079fe9ce6",
+    "name": "SMS Messaging API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for sending outbound SMS messages. Inbound SMS events are typically consumed as Workitems via the SDK's event stream, with webhook configurations handled internally by the Nextiva platform.",
+      "type": "text/plain"
+    }
+  }
+}

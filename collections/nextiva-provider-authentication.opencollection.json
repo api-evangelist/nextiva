@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Provider Authentication API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate token with user authorities (test)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/provider/token-with-authorities",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generates a JWT token containing the authenticated user's authorities and tenant location information.\nThis endpoint provides comprehensive token generation with full permission context.\n"
+        },
+        {
+          "info": {
+            "name": "Generate basic token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/provider/token",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generates a basic JWT token without authorities, containing only essential user information and tenant location.\nUse this endpoint when full permission context is not required.\n"
+        },
+        {
+          "info": {
+            "name": "Authenticate and redirect",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nextiva.com/provider/auth",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Authenticates the current user and performs a redirect to the tenant-specific users service login endpoint with a generated token.\nThis endpoint is typically used for SSO flows and portal integrations.\n"
+        },
+        {
+          "info": {
+            "name": "Generate portal access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/provider/portal/token-with-authorities",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generates a time-limited token specifically for portal access with a 3-hour expiration time.\nIncludes audit logging for security tracking and returns expiration timestamp.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

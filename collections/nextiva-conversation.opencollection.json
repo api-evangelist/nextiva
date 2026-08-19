@@ -1,0 +1,446 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conversation API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch all conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/data/api/types/conversation",
+            "params": [
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Pagination starting index."
+              }
+            ]
+          },
+          "docs": "Fetch conversations. This endpoint retrieves a paginated list of all conversations, allowing filtering by rows and start index.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch a conversation by ID, including its associated workitems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/conversations/:conversationId/workitems",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the conversation."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (for v2)."
+              },
+              {
+                "name": "includeCallRecordings",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include call recordings."
+              },
+              {
+                "name": "includeConversation",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include conversation details."
+              },
+              {
+                "name": "includeParentEngagement",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include parent engagement details."
+              },
+              {
+                "name": "includeSummary",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include a summary."
+              },
+              {
+                "name": "includeVoicemail",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include voicemail."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (for v2)."
+              },
+              {
+                "name": "mentioned",
+                "value": "",
+                "type": "query",
+                "description": "Filter messages that mention the logged user."
+              },
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (for v1)."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Pagination starting index (for v1)."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "API version to use."
+              },
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by workitem ID."
+              }
+            ]
+          },
+          "docs": "Fetches a conversation by its ID, including its associated workitems. This endpoint allows for filtering by various parameters and different API versions.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch workitems within a conversation by their status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/conversations/:conversationId/workitems/:workItemStatus",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the conversation."
+              },
+              {
+                "name": "workItemStatus",
+                "value": "",
+                "type": "path",
+                "description": "Status of the workitems to filter by (e.g., 'draft')."
+              },
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Pagination starting index."
+              }
+            ]
+          },
+          "docs": "Fetches a conversation's messages with workItems only in a given status. This allows filtering workitems within a specific conversation based on their status.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch recent conversation workitem engagements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/recentConversationWorkitems",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter type for conversations."
+              },
+              {
+                "name": "ignoreVoicemailTranscripts",
+                "value": "",
+                "type": "query",
+                "description": "Whether to ignore voicemail transcripts."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "tab",
+                "value": "",
+                "type": "query",
+                "description": "Tab filter for conversations."
+              }
+            ]
+          },
+          "docs": "Fetches recent conversation workitem engagements based on provided parameters like cursor, filter type, and limit. This helps in paginating and filtering recent conversation activity.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch conversation history by participant ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/conversations/workitems",
+            "params": [
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "participantIds",
+                "value": "",
+                "type": "query",
+                "description": "IDs of the participants to filter by."
+              }
+            ]
+          },
+          "docs": "Fetches conversation messages between the logged user and the participants specified in the `participantIds` array. This endpoint provides paginated history for specific participants.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch conversations associated with a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/tickets/:ticketId/conversations",
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ticket."
+              }
+            ]
+          },
+          "docs": "Fetches all conversations associated with a specific ticket ID. This provides a paginated list of conversations relevant to a particular support ticket.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch unread conversation counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/data/api/types/conversation/unread/counts"
+          },
+          "docs": "Fetches unread counts for various types of conversations. This endpoint provides a summary of internal, mentions, total, voice calls, and voicemails unread counts.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch transcriptions and recordings for a specific workitem within a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/types/conversation/:conversationId/workitems/:workitemId/transcriptions-and-recordings",
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the conversation."
+              },
+              {
+                "name": "workitemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workitem."
+              },
+              {
+                "name": "createdAt",
+                "value": "",
+                "type": "query",
+                "description": "Creation timestamp of the workitem."
+              }
+            ]
+          },
+          "docs": "Fetches transcriptions and recordings associated with a specific workitem within a conversation. This endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch a summary of conversation activity (DEPRECATED)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/conversationActivitySummary"
+          },
+          "docs": "Fetches a summary of conversation activity, including categorized conversations and unread counts. This endpoint is **DEPRECATED** and should be replaced by accessing the new v2 API via `sdk.getSchemaTypeClient()`.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch recent conversation workitems for a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nextiva.com/analytics/api/campaigns/:campaignId/recentconversationworkitems",
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the campaign."
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Filter archived conversations."
+              },
+              {
+                "name": "calls",
+                "value": "",
+                "type": "query",
+                "description": "Filter calls."
+              },
+              {
+                "name": "conversationType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by conversation type."
+              },
+              {
+                "name": "draft",
+                "value": "",
+                "type": "query",
+                "description": "Filter draft conversations."
+              },
+              {
+                "name": "inboundCalls",
+                "value": "",
+                "type": "query",
+                "description": "Filter inbound calls."
+              },
+              {
+                "name": "latest",
+                "value": "",
+                "type": "query",
+                "description": "Filter latest conversations."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return."
+              },
+              {
+                "name": "mentioned",
+                "value": "",
+                "type": "query",
+                "description": "Filter messages that have mentions."
+              },
+              {
+                "name": "messages",
+                "value": "",
+                "type": "query",
+                "description": "Filter messages."
+              },
+              {
+                "name": "missedCalls",
+                "value": "",
+                "type": "query",
+                "description": "Filter missed calls."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              },
+              {
+                "name": "outboundCalls",
+                "value": "",
+                "type": "query",
+                "description": "Filter outbound calls."
+              },
+              {
+                "name": "read",
+                "value": "",
+                "type": "query",
+                "description": "Filter read messages."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Filter by scope."
+              },
+              {
+                "name": "totalUnread",
+                "value": "",
+                "type": "query",
+                "description": "Include unread count for each conversation."
+              },
+              {
+                "name": "voicemails",
+                "value": "",
+                "type": "query",
+                "description": "Filter voicemails."
+              },
+              {
+                "name": "workitem",
+                "value": "",
+                "type": "query",
+                "description": "Filter by workitem ID."
+              }
+            ]
+          },
+          "docs": "Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
