@@ -78,6 +78,13 @@ apis:
   humanURL: https://developer.nextiva.com/nextiva/reference/fetchworkitems
   baseURL: https://api.nextiva.com
   tags:
+  - Work Items
+  - Call Control
+  - Contact Center
+  - Transfers
+  - DTMF
+  - Email
+  tags_raw:
   - Workitems
   - Call Control
   - Contact Center
