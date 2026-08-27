@@ -34,107 +34,184 @@ tags:
 - Conversational AI
 - Call Center
 apis:
-- aid: nextiva:provider-authentication
-  name: Nextiva Provider Authentication API
-  description: Login and token refresh for the Nextiva Contact Center platform. Basic
-    authentication generates a JWT bearer token carrying the user's authorities; the
-    token-refresh operation exchanges an existing bearer token for a new one. Every
-    other Nextiva API requires the token this API issues.
+- aid: nextiva:nextiva-authentication-api
+  name: Nextiva Authentication API
+  description: User login and token management operations.
   humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
   baseURL: https://api.nextiva.com
   tags:
   - Authentication
-  - Tokens
-  - Security
   properties:
   - type: OpenAPI
-    url: openapi/nextiva-authentication-openapi.yml
-  - type: Overlay
-    url: overlays/nextiva-authentication-overlay.yaml
+    url: openapi/nextiva-authentication-api-openapi.yml
   - type: Documentation
     url: https://developer.nextiva.com/nextiva/docs/authentication
-- aid: nextiva:provider-token-service
-  name: Nextiva Provider Token Service API
-  description: Spring-secured provider token endpoints that mint JWTs with user authorities,
-    authenticate a user and redirect with a secure token, and generate time-limited
-    multi-tenant portal access tokens.
-  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
-  baseURL: https://api.nextiva.com/provider
-  tags:
-  - Authentication
-  - Tokens
-  - Multi-Tenant
-  properties:
-  - type: OpenAPI
-    url: openapi/nextiva-provider-authentication-openapi.yml
-  - type: Overlay
-    url: overlays/nextiva-provider-authentication-overlay.yaml
-- aid: nextiva:workitem-service
-  name: Nextiva Workitem Service API
-  description: Retrieve and control workitems — the unit of work in the Nextiva Contact
-    Center — and the calls attached to them. Fetch workitems and workitem detail,
-    bridge, hold, hang up, mute and unmute a call, send DTMF digits, change ACD priority,
-    send an email response, and transfer a call to another agent or to an inbox queue.
-  humanURL: https://developer.nextiva.com/nextiva/reference/fetchworkitems
-  baseURL: https://api.nextiva.com
-  tags:
-  - Work Items
-  - Call Control
-  - Contact Center
-  - Transfers
-  - DTMF
-  - Email
-  tags_raw:
-  - Workitems
-  - Call Control
-  - Contact Center
-  - Transfers
-  - DTMF
-  - Email
-  properties:
-  - type: OpenAPI
-    url: openapi/nextiva-workitem-service-openapi.yml
-  - type: Overlay
-    url: overlays/nextiva-workitem-service-overlay.yaml
   - type: Documentation
     url: https://developer.nextiva.com/nextiva/docs/workitem-service
-- aid: nextiva:conversation
-  name: Nextiva Conversation API
-  description: Read the conversation graph across the contact center — conversations
-    and their workitems, conversation history by participant, campaign and ticket
-    scoped conversations, unread counts, conversation activity summaries, and the
-    transcriptions and call recordings attached to a workitem.
-  humanURL: https://developer.nextiva.com/nextiva/reference/fetchconversations
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-call-management-api
+  name: Nextiva Call Management API
+  description: Actions specific to managing calls within workitems
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
+  baseURL: https://api.nextiva.com
+  tags:
+  - Call Management
+  properties:
+  - type: OpenAPI
+    url: openapi/nextiva-call-management-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-campaigns-api
+  name: Nextiva Campaigns API
+  description: The Campaigns API from Nextiva — 1 operation(s) for campaigns.
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
+  baseURL: https://api.nextiva.com
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/nextiva-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-conversations-api
+  name: Nextiva Conversations API
+  description: Operations related to conversations
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
   baseURL: https://api.nextiva.com
   tags:
   - Conversations
-  - Analytics
-  - Transcription
-  - Recordings
-  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/nextiva-conversations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-dtmf-api
+  name: Nextiva DTMF API
+  description: DTMF tone sending for calls
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
+  baseURL: https://api.nextiva.com
+  tags:
+  - DTMF
+  properties:
+  - type: OpenAPI
+    url: openapi/nextiva-dtmf-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-email-api
+  name: Nextiva Email API
+  description: Email-related workitem operations
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
+  baseURL: https://api.nextiva.com
+  tags:
+  - Email
+  properties:
+  - type: OpenAPI
+    url: openapi/nextiva-email-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-sms-messaging-api
+  name: Nextiva SMS Messaging API
+  description: Operations for sending and managing SMS messages.
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
+  baseURL: https://api.nextiva.com
+  tags:
+  - SMS Messaging
+  properties:
+  - type: OpenAPI
+    url: openapi/nextiva-sms-messaging-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-tickets-api
+  name: Nextiva Tickets API
+  description: The Tickets API from Nextiva — 1 operation(s) for tickets.
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
+  baseURL: https://api.nextiva.com
+  tags:
   - Tickets
   properties:
   - type: OpenAPI
-    url: openapi/nextiva-conversation-openapi.yml
-  - type: Overlay
-    url: overlays/nextiva-conversation-overlay.yaml
+    url: openapi/nextiva-tickets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
   - type: Documentation
     url: https://developer.nextiva.com/nextiva/docs/conversation-service
-- aid: nextiva:sms-messaging
-  name: Nextiva SMS Messaging API
-  description: Send outbound SMS messages from a Nextiva user. Inbound SMS arrives
-    as a workitem on the SDK event stream rather than as a customer-configured webhook.
-  humanURL: https://developer.nextiva.com/nextiva/reference/sendsmsmessage
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-transfers-api
+  name: Nextiva Transfers API
+  description: Operations for transferring workitems
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
   baseURL: https://api.nextiva.com
   tags:
-  - SMS
-  - Messaging
-  - Text
+  - Transfers
   properties:
   - type: OpenAPI
-    url: openapi/nextiva-sms-messaging-openapi.yml
-  - type: Overlay
-    url: overlays/nextiva-sms-messaging-overlay.yaml
+    url: openapi/nextiva-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
+- aid: nextiva:nextiva-workitems-api
+  name: Nextiva Workitems API
+  description: The Workitems API from Nextiva — 4 operation(s) for workitems.
+  humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
+  baseURL: https://api.nextiva.com
+  tags:
+  - Workitems
+  properties:
+  - type: OpenAPI
+    url: openapi/nextiva-workitems-api-openapi.yml
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/authentication
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/workitem-service
+  - type: Documentation
+    url: https://developer.nextiva.com/nextiva/docs/conversation-service
   - type: Documentation
     url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
 maintainers:
@@ -143,6 +220,16 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/nextiva-authentication-overlay.yaml
+- type: Overlay
+  url: overlays/nextiva-provider-authentication-overlay.yaml
+- type: Overlay
+  url: overlays/nextiva-workitem-service-overlay.yaml
+- type: Overlay
+  url: overlays/nextiva-conversation-overlay.yaml
+- type: Overlay
+  url: overlays/nextiva-sms-messaging-overlay.yaml
 - type: Website
   url: https://www.nextiva.com/
 - type: DeveloperPortal
