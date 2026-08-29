@@ -11,6 +11,18 @@ description: 'Nextiva is a Scottsdale, Arizona based cloud communications and cu
   backend over HTTP plus two WebSocket channels — an events socket for real-time
   workitem, offer, phone-state and live-transcription notifications, and an analytics
   socket for supervisory data.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://files.readme.io/c57cfd17e3ed303431732141b3a42eaff618f7682e4cd2c42e12470ba7ce8878-nextiva_logo_rgb_dark.svg
 url: https://raw.githubusercontent.com/api-evangelist/nextiva/refs/heads/main/apis.yml
 x-type: company
