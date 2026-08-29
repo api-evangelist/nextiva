@@ -1,0 +1,79 @@
+slug: nextiva
+provider: Nextiva
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Call Management
+  spec_file: nextiva-call-management-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.85
+  evidence: POST /users/api/calls/{workitemId}/bridge Activates a call for a given workitem (Bridge);
+    POST .../hold Puts a call on hold; POST .../hangup Ends a call; POST .../mute Mutes a call
+  reason: Agent-side telephony control (bridge, hold, hangup, mute) over contact-centre workitems — this
+    is contact centre operations/telephony handling within Nextiva's NCX platform.
+- tag: Conversations
+  spec_file: nextiva-conversations-api-openapi.yml
+  capability_id: BC-430
+  capability_id_l1: BC-430
+  capability_name: Customer Service Management
+  confidence: 0.8
+  evidence: GET /analytics/api/conversations/{conversationId}/workitems Fetch a conversation by ID, including
+    its associated workitems; GET .../transcriptions-and-recordings Fetch transcriptions and recordings;
+    GET /data/api/types/conversation/unread/counts Fetch unread conversation counts
+  reason: Retrieval of customer conversation records, workitem status, transcripts/recordings and unread
+    counts in a contact-centre platform — clearly customer service/contact interaction management; ambiguity
+    is only over whether it is inquiry handling or contact-centre operations.
+- tag: Transfers
+  spec_file: nextiva-transfers-api-openapi.yml
+  capability_id: BC-430
+  capability_id_l1: BC-430
+  capability_name: Customer Service Management
+  confidence: 0.8
+  evidence: POST /users/api/calls/{workitemId}/usertransfer/{userId} 'Transfers a workitem to another
+    agent'; 'transferWorkitemToInbox — Transfers a workitem to an inbox/queue'
+  reason: Operations control live contact-centre interactions, transferring them between agents and queues.
+    That is contact-centre interaction handling (customer service operations), not network-level telephony
+    engineering. Sub-capability is ambiguous between inbound routing/resolution and contact-centre operations,
+    so only the L1 is asserted.
+- tag: Workitems
+  spec_file: nextiva-workitems-api-openapi.yml
+  capability_id: BC-430
+  capability_id_l1: BC-430
+  capability_name: Customer Service Management
+  confidence: 0.75
+  evidence: '''Fetch transcriptions and recordings for a specific workitem within a conversation''; ''changeWorkitemPriority
+    — Change the priority of a workitem'''
+  reason: Workitems are contact-centre interactions; the API retrieves them with recordings/transcriptions
+    and re-prioritises them for ACD handling — customer service / contact-centre operations. L2 left null
+    as evidence spans routing, recording and analytics.
+- tag: DTMF
+  spec_file: nextiva-dtmf-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.7
+  evidence: POST /users/api/calls/{workitemId}/dtmf/{digit} sendDtmfTones Sends DTMF tones during a call
+  reason: In-call DTMF signalling from an agent desktop against a contact-centre workitem — telephony
+    control within contact centre operations. Single operation, hence 0.7.
+- tag: Email
+  spec_file: nextiva-email-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.7
+  evidence: POST /users/api/workitems/{workitemId}/sendemailresponse sendEmailResponse Sends an email
+    response for a workitem
+  reason: Sending an email response to a customer interaction workitem is resolution of an inbound customer
+    contact in a contact centre; single-operation evidence keeps confidence moderate.
