@@ -214,6 +214,8 @@ apis:
   humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
   baseURL: https://api.nextiva.com
   tags:
+  - Work Items
+  tags_raw:
   - Workitems
   properties:
   - type: OpenAPI
