@@ -1,0 +1,179 @@
+openapi: 3.2.0
+info:
+  title: Conversation Campaigns API
+  version: 1.0.0
+  description: API for managing and retrieving conversation data.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+security:
+- bearerAuth: []
+tags:
+- name: Campaigns
+paths:
+  /analytics/api/campaigns/{campaignId}/recentconversationworkitems:
+    get:
+      summary: Fetch recent conversation workitems for a campaign
+      operationId: fetchConversationByCampaignId
+      tags:
+      - Campaigns
+      description: 'Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.
+
+        '
+      parameters:
+      - in: path
+        name: campaignId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the campaign.
+      - in: query
+        name: archived
+        schema:
+          type: boolean
+        description: Filter archived conversations.
+      - in: query
+        name: calls
+        schema:
+          type: boolean
+        description: Filter calls.
+      - in: query
+        name: conversationType
+        schema:
+          type: string
+          enum:
+          - contact_based
+          - shared_inbox_internal
+          - internal_chat
+          - channel
+        description: Filter by conversation type.
+      - in: query
+        name: draft
+        schema:
+          type: boolean
+        description: Filter draft conversations.
+      - in: query
+        name: inboundCalls
+        schema:
+          type: boolean
+        description: Filter inbound calls.
+      - in: query
+        name: latest
+        schema:
+          type: boolean
+        description: Filter latest conversations.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+          default: 100
+        description: Number of items to return.
+      - in: query
+        name: mentioned
+        schema:
+          type: boolean
+        description: Filter messages that have mentions.
+      - in: query
+        name: messages
+        schema:
+          type: boolean
+        description: Filter messages.
+      - in: query
+        name: missedCalls
+        schema:
+          type: boolean
+        description: Filter missed calls.
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        description: Offset for pagination.
+      - in: query
+        name: outboundCalls
+        schema:
+          type: boolean
+        description: Filter outbound calls.
+      - in: query
+        name: read
+        schema:
+          type: boolean
+        description: Filter read messages.
+      - in: query
+        name: scope
+        schema:
+          type: string
+          enum:
+          - INTERNAL
+          - EXTERNAL
+        description: Filter by scope.
+      - in: query
+        name: totalUnread
+        schema:
+          type: boolean
+        description: Include unread count for each conversation.
+      - in: query
+        name: voicemails
+        schema:
+          type: boolean
+        description: Filter voicemails.
+      - in: query
+        name: workitem
+        schema:
+          type: string
+        description: Filter by workitem ID.
+      responses:
+        '200':
+          description: A paginated list of conversations related to a campaign.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Workitem:
+      type: object
+      properties:
+        workitemId:
+          type: string
+          description: Unique identifier for the workitem.
+    PaginatedResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            type: object
+          description: Array of objects.
+    ConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

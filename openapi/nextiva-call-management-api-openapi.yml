@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  title: Workitem Service Call Management API
+  version: 1.0.0
+  description: API for managing and retrieving Workitem data and controlling call/interaction states.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+security:
+- bearerAuth: []
+tags:
+- name: Call Management
+  description: Actions specific to managing calls within workitems
+paths:
+  /users/api/calls/{workitemId}/bridge:
+    post:
+      summary: Activates a call for a given workitem (Bridge)
+      operationId: activeWorkitemCall
+      tags:
+      - Call Management
+      description: 'Activates a call for a given workitem. This endpoint makes a POST request to bridge (activate) a call for the specified workitem.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to activate.
+      responses:
+        '200':
+          description: Call successfully activated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/hold:
+    post:
+      summary: Puts a call on hold
+      operationId: holdWorkitemCall
+      tags:
+      - Call Management
+      description: 'Puts a call on hold for a given workitem. This endpoint sends a POST request to place the specified workitem (call) on hold.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to put on hold.
+      responses:
+        '200':
+          description: Call successfully put on hold.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/hangup:
+    post:
+      summary: Ends a call
+      operationId: hangUpWorkitemCall
+      tags:
+      - Call Management
+      description: 'Ends a call associated with a given workitem. This endpoint sends a POST request to terminate the specified workitem (call).
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to hang up.
+      responses:
+        '200':
+          description: Call successfully ended.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/api/calls/{workitemId}/mute:
+    post:
+      summary: Mutes a call
+      operationId: muteWorkitemCall
+      tags:
+      - Call Management
+      description: 'Mutes a call associated with a given workitem. This endpoint sends a POST request to mute the specified workitem (call).
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to mute.
+      responses:
+        '200':
+          description: Call successfully muted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Unmutes a call
+      operationId: unMuteWorkitemCall
+      tags:
+      - Call Management
+      description: 'Unmutes a call associated with a given workitem. This endpoint sends a DELETE request to unmute the specified workitem (call).
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem (call) to unmute.
+      responses:
+        '200':
+          description: Call successfully unmuted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Workitem:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Internal unique identifier (MongoDB ID).
+        workitemId:
+          type: string
+          description: Public unique identifier for the workitem.
+        state:
+          type: string
+          description: Current state of the workitem (e.g., active, hold, inqueue).
+        channelType:
+          type: string
+          description: The communication channel (e.g., voice, chat, email).
+        type:
+          type: string
+          description: The specific type of workitem (e.g., InboundCall, OutboundSMS).
+        priority:
+          type: integer
+          description: Priority of the workitem (1-5).
+        agentUsername:
+          type: string
+          description: Username of the assigned agent.
+        createdAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when created.
+        modifiedAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when last modified.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

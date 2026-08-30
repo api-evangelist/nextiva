@@ -1,0 +1,490 @@
+openapi: 3.2.0
+info:
+  title: Nextiva Authentication API
+  version: 1.0.0
+  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: nextiva-authentication-openapi.yml, nextiva-provider-authentication-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+- url: https://api.nextiva.com/provider
+  description: Production server
+- url: https://api-staging.nextiva.com/provider
+  description: Staging server
+- url: http://localhost:8080
+  description: Development server
+tags:
+- name: Authentication
+  description: User login and token management operations.
+paths:
+  /provider/token-with-authorities:
+    get:
+      summary: Generate token with user authorities (Login)
+      operationId: generateTokenWithAuthorities
+      tags:
+      - Authentication
+      description: 'Logs in a user with the provided username and password using Basic Authentication.
+
+        Returns a JWT token containing the authenticated user''s authorities and tenant location information.
+
+        This endpoint provides comprehensive token generation with full permission context.
+
+        '
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: Successfully authenticated and generated token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Unauthorized - Invalid username or password.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.nextiva.com
+      description: Nextiva API Base URL
+  /provider/api/token-refresh:
+    get:
+      summary: Refresh authentication token
+      operationId: refreshToken
+      tags:
+      - Authentication
+      description: 'Refreshes an existing authentication token. This endpoint uses the current valid token
+
+        (typically sent as a Bearer token in the Authorization header) to obtain a new, updated token
+
+        and location details.
+
+        '
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Token successfully refreshed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshTokenResponse'
+        '401':
+          description: Unauthorized - Invalid or expired token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.nextiva.com
+      description: Nextiva API Base URL
+  /token-with-authorities:
+    get:
+      tags:
+      - Authentication
+      summary: Generate token with user authorities (test)
+      description: 'Generates a JWT token containing the authenticated user''s authorities and tenant location information.
+
+        This endpoint provides comprehensive token generation with full permission context.
+
+        '
+      operationId: generateTokenWithAuthorities
+      security:
+      - springAuth: []
+      x-readme:
+        code-samples:
+        - language: shell
+          name: cURL
+          code: 'curl -X GET "https://api.nextiva.com/provider/token-with-authorities"                 -H "Authorization: Bearer {existing-token}"
+
+            '
+        - language: node
+          name: JavaScript (fetch)
+          code: "const response = await fetch('https://api.nextiva.com/provider/token-with-authorities', {\n  headers: { 'Authorization': 'Bearer ' + existingToken }\n});\nconst data = await response.json();\n"
+        - language: java
+          name: Java
+          code: "HttpClient client = HttpClient.newHttpClient();\nHttpRequest request = HttpRequest.newBuilder()\n    .uri(URI.create(\"https://api.nextiva.com/provider/token-with-authorities\"))\n    .header(\"Authorization\", \"Bearer \" + existingToken)\n    .build();\nHttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());\n"
+      responses:
+        '200':
+          description: Successfully generated token with authorities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenAuthenticationResponse'
+              examples:
+                withClientLocation:
+                  summary: Response with client location
+                  value:
+                    clientLocation: https://client1.nextiva.com
+                    location: https://api1.nextiva.com
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                withoutClientLocation:
+                  summary: Response without client location
+                  value:
+                    clientLocation: null
+                    location: https://api1.nextiva.com
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.nextiva.com/provider
+      description: Production server
+    - url: https://api-staging.nextiva.com/provider
+      description: Staging server
+    - url: http://localhost:8080
+      description: Development server
+  /token:
+    get:
+      tags:
+      - Authentication
+      summary: Generate basic token
+      description: 'Generates a basic JWT token without authorities, containing only essential user information and tenant location.
+
+        Use this endpoint when full permission context is not required.
+
+        '
+      operationId: generateToken
+      security:
+      - springAuth: []
+      x-readme:
+        code-samples:
+        - language: shell
+          name: cURL
+          code: 'curl -X GET "https://api.nextiva.com/provider/token"                 -H "Authorization: Bearer {existing-token}"
+
+            '
+        - language: node
+          name: JavaScript (fetch)
+          code: "const response = await fetch('https://api.nextiva.com/provider/token', {\n  headers: { 'Authorization': 'Bearer ' + existingToken }\n});\nconst data = await response.json();\n"
+        - language: java
+          name: Java
+          code: "HttpClient client = HttpClient.newHttpClient();\nHttpRequest request = HttpRequest.newBuilder()\n    .uri(URI.create(\"https://api.nextiva.com/provider/token\"))\n    .header(\"Authorization\", \"Bearer \" + existingToken)\n    .build();\nHttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());\n"
+      responses:
+        '200':
+          description: Successfully generated token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenAuthenticationResponse'
+              examples:
+                basicToken:
+                  summary: Basic token response
+                  value:
+                    clientLocation: null
+                    location: https://api1.nextiva.com
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.nextiva.com/provider
+      description: Production server
+    - url: https://api-staging.nextiva.com/provider
+      description: Staging server
+    - url: http://localhost:8080
+      description: Development server
+  /auth:
+    post:
+      tags:
+      - Authentication
+      summary: Authenticate and redirect
+      description: 'Authenticates the current user and performs a redirect to the tenant-specific users service login endpoint with a generated token.
+
+        This endpoint is typically used for SSO flows and portal integrations.
+
+        '
+      operationId: authenticate
+      security:
+      - springAuth: []
+      x-readme:
+        code-samples:
+        - language: shell
+          name: cURL
+          code: 'curl -X POST "https://api.nextiva.com/provider/auth"                 -H "Authorization: Bearer {existing-token}"                 -i
+
+            '
+        - language: node
+          name: JavaScript (fetch)
+          code: "const res = await fetch('https://api.nextiva.com/provider/auth', {\n  method: 'POST',\n  headers: { 'Authorization': 'Bearer ' + existingToken },\n  redirect: 'manual'\n});\nconsole.log(res.status, res.headers.get('Location'));\n"
+      responses:
+        '302':
+          description: Redirect to tenant location with token
+          headers:
+            Location:
+              description: Redirect URL with token parameter
+              schema:
+                type: string
+                example: https://api1.nextiva.com/users/api/login?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.nextiva.com/provider
+      description: Production server
+    - url: https://api-staging.nextiva.com/provider
+      description: Staging server
+    - url: http://localhost:8080
+      description: Development server
+  /portal/token-with-authorities:
+    get:
+      tags:
+      - Authentication
+      summary: Generate portal access token
+      description: 'Generates a time-limited token specifically for portal access with a 3-hour expiration time.
+
+        Includes audit logging for security tracking and returns expiration timestamp.
+
+        '
+      operationId: generatePortalToken
+      security:
+      - springAuth: []
+      x-readme:
+        code-samples:
+        - language: shell
+          name: cURL
+          code: 'curl -X GET "https://api.nextiva.com/provider/portal/token-with-authorities"                 -H "Authorization: Bearer {existing-token}"
+
+            '
+        - language: node
+          name: JavaScript (fetch)
+          code: "const response = await fetch('https://api.nextiva.com/provider/portal/token-with-authorities', {\n  headers: { 'Authorization': 'Bearer ' + existingToken }\n});\nconst data = await response.json();\n"
+      responses:
+        '200':
+          description: Successfully generated portal token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse_2'
+              examples:
+                portalToken:
+                  summary: Portal token with expiration
+                  value:
+                    location: https://api1.nextiva.com
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                    expiresAt: 1672531200000
+        '400':
+          description: Bad request - Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-implementation-notes: '- Token expires after 3 hours from issuance
+
+        - Audit trace is logged for successful token generation
+
+        - Returns null body for error responses
+
+        '
+    servers:
+    - url: https://api.nextiva.com/provider
+      description: Production server
+    - url: https://api-staging.nextiva.com/provider
+      description: Staging server
+    - url: http://localhost:8080
+      description: Development server
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Detailed error message.
+    TokenResponse:
+      type: object
+      properties:
+        location:
+          type: string
+          description: The base URL for the API.
+        token:
+          type: string
+          description: The generated JWT authentication token.
+      required:
+      - location
+      - token
+    RefreshTokenResponse:
+      type: object
+      properties:
+        clientLocation:
+          type: string
+          description: The client-specific location for the refreshed token.
+        location:
+          type: string
+          description: The base URL for the API (may be updated).
+        token:
+          type: string
+          description: The new, refreshed JWT authentication token.
+      required:
+      - clientLocation
+      - location
+      - token
+    TokenResponse_2:
+      type: object
+      description: Extended response with token expiration information
+      additionalProperties: true
+      properties:
+        location:
+          type: string
+          description: API location URL for the tenant
+          example: https://api1.nextiva.com
+        token:
+          type: string
+          description: JWT token for authentication
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        expiresAt:
+          type: integer
+          format: int64
+          description: Token expiration timestamp in milliseconds since epoch
+          example: 1672531200000
+      required:
+      - location
+      - token
+      - expiresAt
+    TokenAuthenticationResponse:
+      type: object
+      description: Response containing JWT token and location information
+      properties:
+        clientLocation:
+          type:
+          - string
+          - 'null'
+          description: Client-specific location URL for multi-tenant deployments
+          example: https://client1.nextiva.com
+        location:
+          type: string
+          description: API location URL for the tenant
+          example: https://api1.nextiva.com
+        token:
+          type: string
+          description: JWT token for authentication
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      required:
+      - token
+      - location
+    ErrorResponse:
+      type: object
+      description: Standardized error response
+      properties:
+        type:
+          type: string
+          description: Error type classification
+          example: AUTHENTICATION_ERROR
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid or expired authentication token
+        code:
+          type: string
+          description: Internal error code
+          example: AUTH_001
+        param:
+          type:
+          - string
+          - 'null'
+          description: Parameter that caused the error, if applicable
+          example: Authorization
+      required:
+      - type
+      - message
+      - code
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication using username and password.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication (JWT).
+    springAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Spring Security authentication using JWT tokens.
+
+        All endpoints require an authenticated user context.
+
+        '
+x-refined-from:
+- nextiva-authentication-openapi.yml
+- nextiva-provider-authentication-openapi.yml

@@ -1,0 +1,214 @@
+openapi: 3.2.0
+info:
+  title: Conversation Tickets API
+  version: 1.0.0
+  description: API for managing and retrieving conversation data.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+security:
+- bearerAuth: []
+tags:
+- name: Tickets
+paths:
+  /analytics/api/tickets/{ticketId}/conversations:
+    get:
+      summary: Fetch conversations associated with a ticket
+      operationId: fetchTicketConversations
+      tags:
+      - Tickets
+      description: 'Fetches all conversations associated with a specific ticket ID. This provides a paginated list of conversations relevant to a particular support ticket.
+
+        '
+      parameters:
+      - in: path
+        name: ticketId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the ticket.
+      responses:
+        '200':
+          description: A paginated list of conversations related to a specific ticket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketConversationsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    PaginatedResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            type: object
+          description: Array of objects.
+    ContactPartial:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+    Conversation:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Internal unique identifier (MongoDB ID).
+        conversationId:
+          type: string
+          description: Public unique identifier for the conversation.
+        conversationType:
+          type: string
+          description: The type of conversation (e.g., 'contact_based', 'shared_inbox_internal').
+        createdAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the conversation was created.
+        createdBy:
+          type: string
+          description: Identifier of the entity that created the conversation.
+        deletedAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) if the conversation was soft-deleted.
+        description:
+          type: string
+          description: An optional description for the conversation.
+        id:
+          type: string
+          description: Alias for conversationId.
+        modifiedAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when the conversation was last modified.
+        modifiedBy:
+          type: string
+          description: Identifier of the entity that last modified the conversation.
+        name:
+          type: string
+          description: A human-readable name or subject for the conversation.
+        objectType:
+          type: string
+          description: The type of object, will always be 'conversation'.
+        parentEngagementId:
+          type: string
+          description: The ID of the parent engagement.
+        parentTicketId:
+          type: string
+          description: The ID of the parent ticket.
+        parentWorkitemId:
+          type: string
+          description: The ID of the parent workitem associated with this conversation.
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+          description: An array of participants involved in the conversation.
+        phoneNumber:
+          type: string
+          description: The primary phone number associated with the conversation.
+        sharedInboxId:
+          type: string
+          description: The ID of the shared inbox, if applicable.
+        sharedInboxName:
+          type: string
+          description: The name of the shared inbox.
+        tenantId:
+          type: string
+          description: The ID of the tenant the conversation belongs to.
+        topicName:
+          type: string
+          description: The name of the topic, if applicable.
+        totalCount:
+          type: integer
+          format: int32
+          description: Total number of messages/events in the conversation.
+        unreadCount:
+          type: integer
+          format: int32
+          description: Number of unread messages/events.
+    TicketConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Conversation'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Participant:
+      type: object
+      properties:
+        addedBy:
+          type: string
+        archivedAt:
+          type: integer
+          format: int64
+        contact:
+          $ref: '#/components/schemas/ContactPartial'
+        firstName:
+          type: string
+        id:
+          type: string
+        joinedAt:
+          type: integer
+          format: int64
+        lastName:
+          type: string
+        notifyByEmail:
+          type: boolean
+        notifyBySMS:
+          type: boolean
+        notifyByVoice:
+          type: boolean
+        notifyByWeb:
+          type: boolean
+        phoneNumber:
+          type: string
+        type:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserParticipantDetails'
+    UserParticipantDetails:
+      type: object
+      properties:
+        _id:
+          type: string
+        addresses:
+          type: array
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        personalInboxCampaignId:
+          type: string
+        phoneNumber:
+          type: string
+        username:
+          type: string

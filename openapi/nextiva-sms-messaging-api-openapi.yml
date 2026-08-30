@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  title: SMS Messaging API
+  version: 1.0.0
+  description: API for sending outbound SMS messages. Inbound SMS events are typically consumed as Workitems via the SDK's event stream, with webhook configurations handled internally by the Nextiva platform.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+tags:
+- name: SMS Messaging
+  description: Operations for sending and managing SMS messages.
+paths:
+  /users/api/sms:
+    post:
+      summary: Send an outbound SMS message
+      operationId: sendSmsMessage
+      tags:
+      - SMS Messaging
+      description: 'Sends an outbound SMS message to a specified recipient. This API allows for associating the message with a campaign, contact, or workitem.
+
+
+        **Note on Inbound SMS:** This SDK primarily exposes APIs for *sending* SMS. Direct webhook configuration for *receiving* inbound SMS is typically handled internally by the Nextiva platform. Inbound SMS events are then consumed by the SDK as Workitems (e.g., `WorkitemTypes.InboundSMS`) via the SDK''s event stream, not through a public API for webhook configuration.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SmsSendMessagePayload'
+      responses:
+        '200':
+          description: SMS message successfully sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendMessageResponse'
+        '400':
+          description: Bad Request - Missing required Campaign ID or invalid parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized - Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Detailed error message.
+    SmsSendMessagePayload:
+      type: object
+      required:
+      - to
+      - message
+      properties:
+        campaignId:
+          type: string
+          description: The ID of the campaign for which the SMS message is being sent. If not provided, the user's default SMS campaign ID will be used.
+        contactId:
+          type: string
+          description: The unique identifier of the contact to whom the SMS message will be sent.
+        contactIds:
+          type: array
+          items:
+            type: string
+          description: An array of contact IDs to whom the SMS message will be sent for group messaging.
+        file:
+          type: string
+          format: binary
+          description: An optional single file to attach to the SMS message. (Implementation might vary, e.g., multipart/form-data).
+        files:
+          type: array
+          items:
+            type: string
+            format: binary
+          description: An array of files to attach to the SMS message. (Implementation might vary, e.g., multipart/form-data).
+        force:
+          type: boolean
+          description: If true, the SMS will be sent regardless of any restrictions or conditions.
+        from:
+          type: string
+          description: The sender's number or identifier.
+        groupSMSParentTicketId:
+          type: string
+          description: The ID of the parent ticket for a group SMS.
+        message:
+          type: string
+          description: The content of the SMS message to be sent.
+        name:
+          type: string
+          description: The name of the recipient.
+        nonAssignedAgentReply:
+          type: boolean
+          description: Indicates if a non-assigned agent can reply.
+        option:
+          type: string
+          description: Additional options or settings for sending the SMS.
+        ticketId:
+          type: string
+          description: The ID of the ticket associated with the SMS message.
+        to:
+          type: string
+          description: The phone number or contact to which the SMS message will be sent.
+        toNumbers:
+          type: array
+          items:
+            type: string
+          description: An array of phone numbers to which the SMS message will be sent for group messaging.
+        workitemId:
+          type: string
+          description: The ID associated with a specific work item for tracking purposes.
+    SendMessageResponse:
+      type: object
+      properties:
+        canDial:
+          type: boolean
+          description: Indicates if dialing is permitted.
+        consentType:
+          type: integer
+          format: int32
+          description: The type of consent obtained.
+      required:
+      - canDial
+      - consentType
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication (JWT).

@@ -1,0 +1,135 @@
+openapi: 3.2.0
+info:
+  title: Workitem Service Email API
+  version: 1.0.0
+  description: API for managing and retrieving Workitem data and controlling call/interaction states.
+servers:
+- url: https://api.nextiva.com
+  description: Nextiva API Base URL
+security:
+- bearerAuth: []
+tags:
+- name: Email
+  description: Email-related workitem operations
+paths:
+  /users/api/workitems/{workitemId}/sendemailresponse:
+    post:
+      summary: Sends an email response for a workitem
+      operationId: sendEmailResponse
+      tags:
+      - Email
+      description: 'Sends an email response related to a specific workitem. This endpoint allows for responding to email-based workitems with a structured email.
+
+        '
+      parameters:
+      - in: path
+        name: workitemId
+        schema:
+          type: string
+        required: true
+        description: Unique identifier of the workitem associated with the email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailResponsePayload'
+      responses:
+        '200':
+          description: Email response successfully sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workitem'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Workitem:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Internal unique identifier (MongoDB ID).
+        workitemId:
+          type: string
+          description: Public unique identifier for the workitem.
+        state:
+          type: string
+          description: Current state of the workitem (e.g., active, hold, inqueue).
+        channelType:
+          type: string
+          description: The communication channel (e.g., voice, chat, email).
+        type:
+          type: string
+          description: The specific type of workitem (e.g., InboundCall, OutboundSMS).
+        priority:
+          type: integer
+          description: Priority of the workitem (1-5).
+        agentUsername:
+          type: string
+          description: Username of the assigned agent.
+        createdAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when created.
+        modifiedAt:
+          type: integer
+          format: int64
+          description: Unix timestamp (ms) when last modified.
+    SendEmailResponsePayload:
+      type: object
+      required:
+      - from
+      - to
+      - subject
+      properties:
+        bccAddresses:
+          type: array
+          items:
+            type: string
+          description: Email addresses to BCC.
+        bodyParts:
+          type: object
+          description: Body parts of the email.
+        ccAddresses:
+          type: array
+          items:
+            type: string
+          description: Email addresses to CC.
+        createdAt:
+          type: integer
+          format: int64
+          description: Creation timestamp.
+        from:
+          type: string
+          format: email
+          description: Sender's email address.
+        subject:
+          type: string
+          description: Email subject.
+        to:
+          type: string
+          format: email
+          description: Recipient's email address.
+        toAddresses:
+          type: array
+          items:
+            type: string
+          description: List of recipient email addresses.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
