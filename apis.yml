@@ -221,18 +221,16 @@ apis:
     url: https://developer.nextiva.com/nextiva/docs/conversation-service
   - type: Documentation
     url: https://developer.nextiva.com/nextiva/reference/inbound-and-outbound-sms
-- aid: nextiva:nextiva-workitems-api
-  name: Nextiva Workitems API
-  description: The Workitems API from Nextiva — 4 operation(s) for workitems.
+- aid: nextiva:nextiva-work-items-api
+  name: Nextiva Work Items API
+  description: The Work Items API from Nextiva — 4 operation(s) for work items.
   humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
   baseURL: https://api.nextiva.com
   tags:
   - Work Items
-  tags_raw:
-  - Workitems
   properties:
   - type: OpenAPI
-    url: openapi/nextiva-workitems-api-openapi.yml
+    url: openapi/nextiva-work-items-api-openapi.yml
   - type: Documentation
     url: https://developer.nextiva.com/nextiva/docs/authentication
   - type: Documentation
