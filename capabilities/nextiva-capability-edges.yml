@@ -48,7 +48,8 @@ edges:
     engineering. Sub-capability is ambiguous between inbound routing/resolution and contact-centre operations,
     so only the L1 is asserted.
 - tag: Workitems
-  spec_file: nextiva-workitems-api-openapi.yml
+  spec_file: nextiva-work-items-api-openapi.yml
+  reanchored_from: nextiva-workitems-api-openapi.yml
   capability_id: BC-430
   capability_id_l1: BC-430
   capability_name: Customer Service Management
