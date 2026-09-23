@@ -18,9 +18,7 @@ paths:
       operationId: sendDtmfTones
       tags:
       - DTMF
-      description: 'Sends Dual-Tone Multi-Frequency (DTMF) tones during an active call associated with a workitem. This can be used for interacting with IVR systems or entering digits.
-
-        '
+      description: Sends Dual-Tone Multi-Frequency (DTMF) tones during an active call associated with a workitem. This can be used for interacting with IVR systems or entering digits.
       parameters:
       - in: path
         name: workitemId
@@ -49,6 +47,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Workitem:
       type: object
       properties:
@@ -81,13 +86,6 @@ components:
           type: integer
           format: int64
           description: Unix timestamp (ms) when last modified.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

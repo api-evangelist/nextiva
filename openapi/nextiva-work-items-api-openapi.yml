@@ -9,17 +9,15 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Workitems
+- name: Work Items
 paths:
   /analytics/api/types/conversation/{conversationId}/workitems/{workitemId}/transcriptions-and-recordings:
     get:
-      summary: Fetch transcriptions and recordings for a specific workitem within a conversation
+      summary: Fetch transcriptions and recordings for a specific workitem within a…
       operationId: fetchTranscriptionsAndRecordings
       tags:
-      - Workitems
-      description: 'Fetches transcriptions and recordings associated with a specific workitem within a conversation. This endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.
-
-        '
+      - Work Items
+      description: Fetches transcriptions and recordings associated with a specific workitem within a conversation. This endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.
       parameters:
       - in: path
         name: conversationId
@@ -60,10 +58,8 @@ paths:
       summary: Fetch all workitems
       operationId: fetchWorkitems
       tags:
-      - Workitems
-      description: 'Fetch all workitems. This endpoint retrieves a paginated list of workitems, allowing filtering by query string, rows, start index, and additional query parameters.
-
-        '
+      - Work Items
+      description: Fetch all workitems. This endpoint retrieves a paginated list of workitems, allowing filtering by query string, rows, start index, and additional query parameters.
       parameters:
       - in: query
         name: q
@@ -111,10 +107,8 @@ paths:
       summary: Fetch a specific workitem by ID
       operationId: fetchWorkitemById
       tags:
-      - Workitems
-      description: 'Fetch a specific workitem by ID. This endpoint retrieves a single workitem by its unique identifier.
-
-        '
+      - Work Items
+      description: Fetch a specific workitem by ID. This endpoint retrieves a single workitem by its unique identifier.
       parameters:
       - in: path
         name: id
@@ -145,10 +139,8 @@ paths:
       summary: Change the priority of a workitem
       operationId: changeWorkitemPriority
       tags:
-      - Workitems
-      description: 'Changes the priority of a workitem. This endpoint updates the priority of a specific workitem within the ACD system.
-
-        '
+      - Work Items
+      description: Changes the priority of a workitem. This endpoint updates the priority of a specific workitem within the ACD system.
       parameters:
       - in: path
         name: workitemId
@@ -185,41 +177,12 @@ paths:
       description: Nextiva API Base URL
 components:
   schemas:
-    PaginatedResponse:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: Number of objects in the current page.
-        total:
-          type: integer
-          format: int32
-          description: Total number of objects matching the criteria.
-        objects:
-          type: array
-          items:
-            type: object
-          description: Array of objects.
-    Message:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Unique identifier for the message.
     Error:
       type: object
       properties:
         code:
           type: string
         message:
-          type: string
-    ConversationCallRecordingData:
-      type: object
-      properties:
-        id:
-          type: string
-        url:
           type: string
     TranscriptionsAndRecordingsResponse:
       allOf:
@@ -245,16 +208,20 @@ components:
                   type: string
                 workitemId:
                   type: string
-    FetchWorkitemsResponseBody:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse_2'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Workitem'
-    PaginatedResponse_2:
+    ConversationCallRecordingData:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Unique identifier for the message.
+    PaginatedResponse:
       type: object
       properties:
         count:
@@ -268,8 +235,17 @@ components:
         objects:
           type: array
           items:
-            $ref: '#/components/schemas/Workitem'
-          description: Array of workitem objects.
+            type: object
+          description: Array of objects.
+    FetchWorkitemsResponseBody:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse_2'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
     WorkItemPriority:
       type: integer
       format: int32
@@ -312,6 +288,22 @@ components:
           type: integer
           format: int64
           description: Unix timestamp (ms) when last modified.
+    PaginatedResponse_2:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workitem'
+          description: Array of workitem objects.
   securitySchemes:
     bearerAuth:
       type: http

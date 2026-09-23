@@ -19,9 +19,7 @@ paths:
       description: 'Sends an outbound SMS message to a specified recipient. This API allows for associating the message with a campaign, contact, or workitem.
 
 
-        **Note on Inbound SMS:** This SDK primarily exposes APIs for *sending* SMS. Direct webhook configuration for *receiving* inbound SMS is typically handled internally by the Nextiva platform. Inbound SMS events are then consumed by the SDK as Workitems (e.g., `WorkitemTypes.InboundSMS`) via the SDK''s event stream, not through a public API for webhook configuration.
-
-        '
+        **Note on Inbound SMS:** This SDK primarily exposes APIs for *sending* SMS. Direct webhook configuration for *receiving* inbound SMS is typically handled internally by the Nextiva platform. Inbound SMS events are then consumed by the SDK as Workitems (e.g., `WorkitemTypes.InboundSMS`) via the SDK''s event stream, not through a public API for webhook configuration.'
       requestBody:
         required: true
         content:

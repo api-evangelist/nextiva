@@ -17,9 +17,7 @@ paths:
       operationId: fetchConversationByCampaignId
       tags:
       - Campaigns
-      description: 'Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.
-
-        '
+      description: Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.
       parameters:
       - in: path
         name: campaignId
@@ -139,6 +137,22 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
     Workitem:
       type: object
       properties:
@@ -161,19 +175,3 @@ components:
           items:
             type: object
           description: Array of objects.
-    ConversationsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Workitem'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string

@@ -1,0 +1,32 @@
+# Front Door AI Index — nextiva — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: nextiva
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.nextiva.com
+  final_host: www.nextiva.com
+  ownership: own
+  owner: nextiva
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 70
+  host_score: 70
+  density: 21.17
+  words: 3307
+  tiers:
+    agentic: 3
+    core: 67
+    model: 0
+  ambiguous: 16
+  top_terms:
+    AI: 67
+    agent: 11
+    smart: 3
+    AI agent: 1
+    agentic: 1
+    automation: 1
+    chatbot: 1
+    predictive: 1

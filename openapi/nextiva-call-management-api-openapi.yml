@@ -18,9 +18,7 @@ paths:
       operationId: activeWorkitemCall
       tags:
       - Call Management
-      description: 'Activates a call for a given workitem. This endpoint makes a POST request to bridge (activate) a call for the specified workitem.
-
-        '
+      description: Activates a call for a given workitem. This endpoint makes a POST request to bridge (activate) a call for the specified workitem.
       parameters:
       - in: path
         name: workitemId
@@ -47,9 +45,7 @@ paths:
       operationId: holdWorkitemCall
       tags:
       - Call Management
-      description: 'Puts a call on hold for a given workitem. This endpoint sends a POST request to place the specified workitem (call) on hold.
-
-        '
+      description: Puts a call on hold for a given workitem. This endpoint sends a POST request to place the specified workitem (call) on hold.
       parameters:
       - in: path
         name: workitemId
@@ -76,9 +72,7 @@ paths:
       operationId: hangUpWorkitemCall
       tags:
       - Call Management
-      description: 'Ends a call associated with a given workitem. This endpoint sends a POST request to terminate the specified workitem (call).
-
-        '
+      description: Ends a call associated with a given workitem. This endpoint sends a POST request to terminate the specified workitem (call).
       parameters:
       - in: path
         name: workitemId
@@ -105,9 +99,7 @@ paths:
       operationId: muteWorkitemCall
       tags:
       - Call Management
-      description: 'Mutes a call associated with a given workitem. This endpoint sends a POST request to mute the specified workitem (call).
-
-        '
+      description: Mutes a call associated with a given workitem. This endpoint sends a POST request to mute the specified workitem (call).
       parameters:
       - in: path
         name: workitemId
@@ -133,9 +125,7 @@ paths:
       operationId: unMuteWorkitemCall
       tags:
       - Call Management
-      description: 'Unmutes a call associated with a given workitem. This endpoint sends a DELETE request to unmute the specified workitem (call).
-
-        '
+      description: Unmutes a call associated with a given workitem. This endpoint sends a DELETE request to unmute the specified workitem (call).
       parameters:
       - in: path
         name: workitemId
@@ -158,6 +148,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Workitem:
       type: object
       properties:
@@ -190,13 +187,6 @@ components:
           type: integer
           format: int64
           description: Unix timestamp (ms) when last modified.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

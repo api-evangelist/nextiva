@@ -18,9 +18,7 @@ paths:
       operationId: transferWorkitemToAgent
       tags:
       - Transfers
-      description: 'Transfers a workitem (e.g., an active call) to another specified agent. This allows for routing work to the appropriate personnel.
-
-        '
+      description: Transfers a workitem (e.g., an active call) to another specified agent. This allows for routing work to the appropriate personnel.
       parameters:
       - in: path
         name: workitemId
@@ -59,9 +57,7 @@ paths:
       operationId: transferWorkitemToInbox
       tags:
       - Transfers
-      description: 'Transfers a workitem (e.g., an active call or message) to a specified inbox or queue. This is used for routing work to a group of agents or a specific processing queue.
-
-        '
+      description: Transfers a workitem (e.g., an active call or message) to a specified inbox or queue. This is used for routing work to a group of agents or a specific processing queue.
       parameters:
       - in: path
         name: workitemId
@@ -126,6 +122,13 @@ components:
           type: string
         message:
           type: string
+    WorkitemRecordingOption:
+      type: string
+      enum:
+      - keepCurrent
+      - startRecording
+      - stopRecording
+      description: Recording options for transfers.
     TransferToAgentPayload:
       type: object
       required:
@@ -146,13 +149,6 @@ components:
         workitemId:
           type: string
           description: The ID of the workitem to transfer.
-    WorkitemRecordingOption:
-      type: string
-      enum:
-      - keepCurrent
-      - startRecording
-      - stopRecording
-      description: Recording options for transfers.
   securitySchemes:
     bearerAuth:
       type: http

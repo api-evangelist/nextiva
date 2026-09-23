@@ -1,0 +1,54 @@
+{
+  "provider": "nextiva",
+  "sources": [
+    "_original/nextiva-authentication-openapi.yml",
+    "_original/nextiva-conversation-openapi.yml",
+    "_original/nextiva-provider-authentication-openapi.yml",
+    "_original/nextiva-sms-messaging-openapi.yml",
+    "_original/nextiva-workitem-service-openapi.yml"
+  ],
+  "outputs": [
+    "nextiva-authentication-api-openapi.yml",
+    "nextiva-campaigns-api-openapi.yml",
+    "nextiva-conversations-api-openapi.yml",
+    "nextiva-tickets-api-openapi.yml",
+    "nextiva-workitems-api-openapi.yml",
+    "nextiva-sms-messaging-api-openapi.yml",
+    "nextiva-call-management-api-openapi.yml",
+    "nextiva-dtmf-api-openapi.yml",
+    "nextiva-email-api-openapi.yml",
+    "nextiva-transfers-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nextiva-authentication-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "nextiva-conversation-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "nextiva-conversation-openapi.yml: declared missing tag: Campaigns",
+    "nextiva-conversation-openapi.yml: declared missing tag: Tickets",
+    "nextiva-conversation-openapi.yml: declared missing tag: Workitems",
+    "nextiva-provider-authentication-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "nextiva-sms-messaging-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "nextiva-workitem-service-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "tag 'Authentication' spans 2 source specs (nextiva-authentication-openapi.yml, nextiva-provider-authentication-openapi.yml): per-path servers applied",
+    "tag 'Workitems' spans 2 source specs (nextiva-conversation-openapi.yml, nextiva-workitem-service-openapi.yml): per-path servers applied",
+    "superseded outputs removed: nextiva-work-items-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 10 total)"
+  ],
+  "skipped": [
+    "nextiva-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-call-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-campaigns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-conversations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-dtmf-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-email-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-sms-messaging-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-tickets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nextiva-work-items-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

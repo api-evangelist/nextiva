@@ -18,9 +18,7 @@ paths:
       operationId: fetchConversations
       tags:
       - Conversations
-      description: 'Fetch conversations. This endpoint retrieves a paginated list of all conversations, allowing filtering by rows and start index.
-
-        '
+      description: Fetch conversations. This endpoint retrieves a paginated list of all conversations, allowing filtering by rows and start index.
       parameters:
       - in: query
         name: rows
@@ -55,9 +53,7 @@ paths:
       operationId: fetchConversationById
       tags:
       - Conversations
-      description: 'Fetches a conversation by its ID, including its associated workitems. This endpoint allows for filtering by various parameters and different API versions.
-
-        '
+      description: Fetches a conversation by its ID, including its associated workitems. This endpoint allows for filtering by various parameters and different API versions.
       parameters:
       - in: path
         name: conversationId
@@ -155,9 +151,7 @@ paths:
       operationId: fetchConversationWorkItemsByStatus
       tags:
       - Conversations
-      description: 'Fetches a conversation''s messages with workItems only in a given status. This allows filtering workitems within a specific conversation based on their status.
-
-        '
+      description: Fetches a conversation's messages with workItems only in a given status. This allows filtering workitems within a specific conversation based on their status.
       parameters:
       - in: path
         name: conversationId
@@ -204,9 +198,7 @@ paths:
       operationId: fetchConversationByCampaignId
       tags:
       - Conversations
-      description: 'Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.
-
-        '
+      description: Fetches conversations associated with a specific campaign ID. This endpoint allows filtering conversations by various criteria such as archived status, call types, and mentions.
       parameters:
       - in: path
         name: campaignId
@@ -330,9 +322,7 @@ paths:
       operationId: fetchRecentConversationWorkitemEngagements
       tags:
       - Conversations
-      description: 'Fetches recent conversation workitem engagements based on provided parameters like cursor, filter type, and limit. This helps in paginating and filtering recent conversation activity.
-
-        '
+      description: Fetches recent conversation workitem engagements based on provided parameters like cursor, filter type, and limit. This helps in paginating and filtering recent conversation activity.
       parameters:
       - in: query
         name: cursor
@@ -380,9 +370,7 @@ paths:
       operationId: fetchConversationHistoryByParticipantId
       tags:
       - Conversations
-      description: 'Fetches conversation messages between the logged user and the participants specified in the `participantIds` array. This endpoint provides paginated history for specific participants.
-
-        '
+      description: Fetches conversation messages between the logged user and the participants specified in the `participantIds` array. This endpoint provides paginated history for specific participants.
       parameters:
       - in: query
         name: pageNumber
@@ -426,9 +414,7 @@ paths:
       operationId: fetchTicketConversations
       tags:
       - Conversations
-      description: 'Fetches all conversations associated with a specific ticket ID. This provides a paginated list of conversations relevant to a particular support ticket.
-
-        '
+      description: Fetches all conversations associated with a specific ticket ID. This provides a paginated list of conversations relevant to a particular support ticket.
       parameters:
       - in: path
         name: ticketId
@@ -455,9 +441,7 @@ paths:
       operationId: fetchUnreadCounts
       tags:
       - Conversations
-      description: 'Fetches unread counts for various types of conversations. This endpoint provides a summary of internal, mentions, total, voice calls, and voicemails unread counts.
-
-        '
+      description: Fetches unread counts for various types of conversations. This endpoint provides a summary of internal, mentions, total, voice calls, and voicemails unread counts.
       responses:
         '200':
           description: Unread counts for conversations.
@@ -473,13 +457,11 @@ paths:
                 $ref: '#/components/schemas/Error'
   /analytics/api/types/conversation/{conversationId}/workitems/{workitemId}/transcriptions-and-recordings:
     get:
-      summary: Fetch transcriptions and recordings for a specific workitem within a conversation
+      summary: Fetch transcriptions and recordings for a specific workitem within a…
       operationId: fetchTranscriptionsAndRecordings
       tags:
       - Conversations
-      description: 'Fetches transcriptions and recordings associated with a specific workitem within a conversation. This endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.
-
-        '
+      description: Fetches transcriptions and recordings associated with a specific workitem within a conversation. This endpoint provides detailed media data for a workitem, useful for call analysis and quality assurance.
       parameters:
       - in: path
         name: conversationId
@@ -518,9 +500,7 @@ paths:
       operationId: fetchConversationActivitySummary
       tags:
       - Conversations
-      description: 'Fetches a summary of conversation activity, including categorized conversations and unread counts. This endpoint is **DEPRECATED** and should be replaced by accessing the new v2 API via `sdk.getSchemaTypeClient()`.
-
-        '
+      description: Fetches a summary of conversation activity, including categorized conversations and unread counts. This endpoint is **DEPRECATED** and should be replaced by accessing the new v2 API via `sdk.getSchemaTypeClient()`.
       responses:
         '200':
           description: A summary of conversation activity.
@@ -536,112 +516,10 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ConversationByIdResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Workitem'
-          engagementData:
-            type: array
-            items:
-              $ref: '#/components/schemas/EngagementData'
-    Message:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Unique identifier for the message.
-    ContactArray:
-      type: object
-      properties:
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-    TranscriptionsAndRecordingsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              type: object
-              properties:
-                callRecordingData:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/ConversationCallRecordingData'
-                summary:
-                  type: string
-                transcriptionMessages:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Message'
-                voicemailTranscript:
-                  type: string
-                workitemId:
-                  type: string
-    ContactPartial:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-    ConversationCallRecordingData:
-      type: object
-      properties:
-        id:
-          type: string
-        url:
-          type: string
-    Participant:
-      type: object
-      properties:
-        addedBy:
-          type: string
-        archivedAt:
-          type: integer
-          format: int64
-        contact:
-          $ref: '#/components/schemas/ContactPartial'
-        firstName:
-          type: string
-        id:
-          type: string
-        joinedAt:
-          type: integer
-          format: int64
-        lastName:
-          type: string
-        notifyByEmail:
-          type: boolean
-        notifyBySMS:
-          type: boolean
-        notifyByVoice:
-          type: boolean
-        notifyByWeb:
-          type: boolean
-        phoneNumber:
-          type: string
-        type:
-          type: string
-        user:
-          $ref: '#/components/schemas/UserParticipantDetails'
-    RecentConversationWorkitemEngagementsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/EngagementData'
+    ConversationActivitySummaryResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConversationActivitySummary'
     PaginatedResponse:
       type: object
       properties:
@@ -658,6 +536,118 @@ components:
           items:
             type: object
           description: Array of objects.
+    EngagementData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the engagement data.
+    ConversationFilterTabType:
+      type: string
+      enum:
+      - ALL
+      - ARCHIVED
+      - CALLS
+      - CALLS_AND_TEXTS
+      - CHANNELS
+      - DRAFTS
+      - EXTERNAL
+      - INCOMING_CALLS
+      - INTERNAL
+      - MENTIONS
+      - MISSED_CALLS
+      - OUTGOING_CALLS
+      - TEXTS
+      - UNREAD
+      - VOICEMAILS
+    ConversationActivitySummary:
+      type: object
+      properties:
+        categories:
+          type: object
+          properties:
+            latestActivity:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+            unreadMessages:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+            unreadMissedCalls:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+            unreadVoicemails:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+          description: Categorized conversations by activity type.
+        totalUnreadCount:
+          type: integer
+          format: int32
+          description: Total number of unread items.
+        totalUnreadCountByFilter:
+          type: object
+          properties:
+            totalUnreadMessagesCount:
+              type: integer
+              format: int32
+            totalUnreadMissedCallsCount:
+              type: integer
+              format: int32
+            totalUnreadVoiceMailsCount:
+              type: integer
+              format: int32
+          description: Detailed unread counts by filter.
+    ContactPartial:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the contact.
+    ConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+    ConversationCallRecordingData:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+    UserParticipantDetails:
+      type: object
+      properties:
+        _id:
+          type: string
+        addresses:
+          type: array
+          items:
+            type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        personalInboxCampaignId:
+          type: string
+        phoneNumber:
+          type: string
+        username:
+          type: string
     Conversation:
       type: object
       properties:
@@ -737,12 +727,131 @@ components:
           type: integer
           format: int32
           description: Number of unread messages/events.
-    EngagementData:
+    ContactArray:
       type: object
       properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+    ConversationsResponseWithContactArray:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/Workitem'
+              - $ref: '#/components/schemas/ContactArray'
+    Workitem:
+      type: object
+      properties:
+        workitemId:
+          type: string
+          description: Unique identifier for the workitem.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Participant:
+      type: object
+      properties:
+        addedBy:
+          type: string
+        archivedAt:
+          type: integer
+          format: int64
+        contact:
+          $ref: '#/components/schemas/ContactPartial'
+        firstName:
+          type: string
         id:
           type: string
-          description: Unique identifier for the engagement data.
+        joinedAt:
+          type: integer
+          format: int64
+        lastName:
+          type: string
+        notifyByEmail:
+          type: boolean
+        notifyBySMS:
+          type: boolean
+        notifyByVoice:
+          type: boolean
+        notifyByWeb:
+          type: boolean
+        phoneNumber:
+          type: string
+        type:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserParticipantDetails'
+    TranscriptionsAndRecordingsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              type: object
+              properties:
+                callRecordingData:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConversationCallRecordingData'
+                summary:
+                  type: string
+                transcriptionMessages:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Message'
+                voicemailTranscript:
+                  type: string
+                workitemId:
+                  type: string
+    TicketConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Conversation'
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Unique identifier for the message.
+    ConversationByIdResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+          engagementData:
+            type: array
+            items:
+              $ref: '#/components/schemas/EngagementData'
+    RecentConversationWorkitemEngagementsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/EngagementData'
     UnreadCounts:
       type: object
       properties:
@@ -761,132 +870,3 @@ components:
         voicemails:
           type: integer
           format: int32
-    TicketConversationsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Conversation'
-    ConversationActivitySummaryResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/ConversationActivitySummary'
-    Contact:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the contact.
-    ConversationActivitySummary:
-      type: object
-      properties:
-        categories:
-          type: object
-          properties:
-            latestActivity:
-              type: array
-              items:
-                $ref: '#/components/schemas/Conversation'
-            unreadMessages:
-              type: array
-              items:
-                $ref: '#/components/schemas/Conversation'
-            unreadMissedCalls:
-              type: array
-              items:
-                $ref: '#/components/schemas/Conversation'
-            unreadVoicemails:
-              type: array
-              items:
-                $ref: '#/components/schemas/Conversation'
-          description: Categorized conversations by activity type.
-        totalUnreadCount:
-          type: integer
-          format: int32
-          description: Total number of unread items.
-        totalUnreadCountByFilter:
-          type: object
-          properties:
-            totalUnreadMessagesCount:
-              type: integer
-              format: int32
-            totalUnreadMissedCallsCount:
-              type: integer
-              format: int32
-            totalUnreadVoiceMailsCount:
-              type: integer
-              format: int32
-          description: Detailed unread counts by filter.
-    ConversationFilterTabType:
-      type: string
-      enum:
-      - ALL
-      - ARCHIVED
-      - CALLS
-      - CALLS_AND_TEXTS
-      - CHANNELS
-      - DRAFTS
-      - EXTERNAL
-      - INCOMING_CALLS
-      - INTERNAL
-      - MENTIONS
-      - MISSED_CALLS
-      - OUTGOING_CALLS
-      - TEXTS
-      - UNREAD
-      - VOICEMAILS
-    UserParticipantDetails:
-      type: object
-      properties:
-        _id:
-          type: string
-        addresses:
-          type: array
-          items:
-            type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        personalInboxCampaignId:
-          type: string
-        phoneNumber:
-          type: string
-        username:
-          type: string
-    ConversationsResponseWithContactArray:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              oneOf:
-              - $ref: '#/components/schemas/Workitem'
-              - $ref: '#/components/schemas/ContactArray'
-    ConversationsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Workitem'
-    Workitem:
-      type: object
-      properties:
-        workitemId:
-          type: string
-          description: Unique identifier for the workitem.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
