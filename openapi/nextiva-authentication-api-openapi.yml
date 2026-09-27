@@ -94,7 +94,7 @@ paths:
       description: 'Generates a JWT token containing the authenticated user''s authorities and tenant location information.
 
         This endpoint provides comprehensive token generation with full permission context.'
-      operationId: generateTokenWithAuthorities
+      operationId: getTokenWithAuthorities
       security:
       - springAuth: []
       x-readme:
@@ -148,6 +148,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-operation-id-source: normalized
+      x-operation-id-original: generateTokenWithAuthorities
     servers:
     - url: https://api.nextiva.com/provider
       description: Production server
@@ -348,15 +350,18 @@ paths:
       description: Development server
 components:
   schemas:
-    Error:
+    TokenResponse:
       type: object
       properties:
-        code:
+        location:
           type: string
-          description: Error code.
-        message:
+          description: The base URL for the API.
+        token:
           type: string
-          description: Detailed error message.
+          description: The generated JWT authentication token.
+      required:
+      - location
+      - token
     RefreshTokenResponse:
       type: object
       properties:
@@ -373,18 +378,37 @@ components:
       - clientLocation
       - location
       - token
-    TokenResponse:
+    Error:
       type: object
+      properties:
+        code:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Detailed error message.
+    TokenResponse_2:
+      type: object
+      description: Extended response with token expiration information
+      additionalProperties: true
       properties:
         location:
           type: string
-          description: The base URL for the API.
+          description: API location URL for the tenant
+          example: https://api1.nextiva.com
         token:
           type: string
-          description: The generated JWT authentication token.
+          description: JWT token for authentication
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        expiresAt:
+          type: integer
+          format: int64
+          description: Token expiration timestamp in milliseconds since epoch
+          example: 1672531200000
       required:
       - location
       - token
+      - expiresAt
     TokenAuthenticationResponse:
       type: object
       description: Response containing JWT token and location information
@@ -432,28 +456,6 @@ components:
       - type
       - message
       - code
-    TokenResponse_2:
-      type: object
-      description: Extended response with token expiration information
-      additionalProperties: true
-      properties:
-        location:
-          type: string
-          description: API location URL for the tenant
-          example: https://api1.nextiva.com
-        token:
-          type: string
-          description: JWT token for authentication
-          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-        expiresAt:
-          type: integer
-          format: int64
-          description: Token expiration timestamp in milliseconds since epoch
-          example: 1672531200000
-      required:
-      - location
-      - token
-      - expiresAt
   securitySchemes:
     basicAuth:
       type: http

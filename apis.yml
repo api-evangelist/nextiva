@@ -191,6 +191,8 @@ apis:
   humanURL: https://developer.nextiva.com/nextiva/reference/generatetokenwithauthorities
   baseURL: https://api.nextiva.com
   tags:
+  - Ticketing
+  tags_raw:
   - Tickets
   properties:
   - type: OpenAPI

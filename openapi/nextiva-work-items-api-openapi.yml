@@ -177,6 +177,35 @@ paths:
       description: Nextiva API Base URL
 components:
   schemas:
+    PaginatedResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            type: object
+          description: Array of objects.
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Unique identifier for the message.
+    ConversationCallRecordingData:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
     Error:
       type: object
       properties:
@@ -208,35 +237,6 @@ components:
                   type: string
                 workitemId:
                   type: string
-    ConversationCallRecordingData:
-      type: object
-      properties:
-        id:
-          type: string
-        url:
-          type: string
-    Message:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Unique identifier for the message.
-    PaginatedResponse:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: Number of objects in the current page.
-        total:
-          type: integer
-          format: int32
-          description: Total number of objects matching the criteria.
-        objects:
-          type: array
-          items:
-            type: object
-          description: Array of objects.
     FetchWorkitemsResponseBody:
       allOf:
       - $ref: '#/components/schemas/PaginatedResponse_2'
@@ -246,16 +246,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Workitem'
-    WorkItemPriority:
-      type: integer
-      format: int32
-      description: Priority level of a workitem (1-5, 5 being highest).
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
     Workitem:
       type: object
       properties:
@@ -304,6 +294,16 @@ components:
           items:
             $ref: '#/components/schemas/Workitem'
           description: Array of workitem objects.
+    WorkItemPriority:
+      type: integer
+      format: int32
+      description: Priority level of a workitem (1-5, 5 being highest).
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
   securitySchemes:
     bearerAuth:
       type: http

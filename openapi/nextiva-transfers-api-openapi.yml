@@ -115,13 +115,6 @@ components:
         workitemId:
           type: string
           description: The ID of the workitem to transfer.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     WorkitemRecordingOption:
       type: string
       enum:
@@ -129,6 +122,13 @@ components:
       - startRecording
       - stopRecording
       description: Recording options for transfers.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     TransferToAgentPayload:
       type: object
       required:

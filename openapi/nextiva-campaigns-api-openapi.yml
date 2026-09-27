@@ -137,28 +137,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ConversationsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Workitem'
-    Workitem:
-      type: object
-      properties:
-        workitemId:
-          type: string
-          description: Unique identifier for the workitem.
     PaginatedResponse:
       type: object
       properties:
@@ -175,3 +153,25 @@ components:
           items:
             type: object
           description: Array of objects.
+    ConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+    Workitem:
+      type: object
+      properties:
+        workitemId:
+          type: string
+          description: Unique identifier for the workitem.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
