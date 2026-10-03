@@ -350,18 +350,15 @@ paths:
       description: Development server
 components:
   schemas:
-    TokenResponse:
+    Error:
       type: object
       properties:
-        location:
+        code:
           type: string
-          description: The base URL for the API.
-        token:
+          description: Error code.
+        message:
           type: string
-          description: The generated JWT authentication token.
-      required:
-      - location
-      - token
+          description: Detailed error message.
     RefreshTokenResponse:
       type: object
       properties:
@@ -378,15 +375,44 @@ components:
       - clientLocation
       - location
       - token
-    Error:
+    TokenResponse:
       type: object
       properties:
-        code:
+        location:
           type: string
-          description: Error code.
+          description: The base URL for the API.
+        token:
+          type: string
+          description: The generated JWT authentication token.
+      required:
+      - location
+      - token
+    ErrorResponse:
+      type: object
+      description: Standardized error response
+      properties:
+        type:
+          type: string
+          description: Error type classification
+          example: AUTHENTICATION_ERROR
         message:
           type: string
-          description: Detailed error message.
+          description: Human-readable error message
+          example: Invalid or expired authentication token
+        code:
+          type: string
+          description: Internal error code
+          example: AUTH_001
+        param:
+          type:
+          - string
+          - 'null'
+          description: Parameter that caused the error, if applicable
+          example: Authorization
+      required:
+      - type
+      - message
+      - code
     TokenResponse_2:
       type: object
       description: Extended response with token expiration information
@@ -430,32 +456,6 @@ components:
       required:
       - token
       - location
-    ErrorResponse:
-      type: object
-      description: Standardized error response
-      properties:
-        type:
-          type: string
-          description: Error type classification
-          example: AUTHENTICATION_ERROR
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid or expired authentication token
-        code:
-          type: string
-          description: Internal error code
-          example: AUTH_001
-        param:
-          type:
-          - string
-          - 'null'
-          description: Parameter that caused the error, if applicable
-          example: Authorization
-      required:
-      - type
-      - message
-      - code
   securitySchemes:
     basicAuth:
       type: http

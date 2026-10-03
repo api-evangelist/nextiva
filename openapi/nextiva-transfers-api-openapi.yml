@@ -92,6 +92,33 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    TransferToAgentPayload:
+      type: object
+      required:
+      - userId
+      - workitemId
+      properties:
+        eventName:
+          type: string
+          description: Name given to the transfer event.
+        recording:
+          $ref: '#/components/schemas/WorkitemRecordingOption'
+        survey:
+          type: object
+          description: Survey data.
+        userId:
+          type: string
+          description: The ID of the user (agent) to transfer the workitem to.
+        workitemId:
+          type: string
+          description: The ID of the workitem to transfer.
     TransferToInboxPayload:
       type: object
       required:
@@ -122,33 +149,6 @@ components:
       - startRecording
       - stopRecording
       description: Recording options for transfers.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    TransferToAgentPayload:
-      type: object
-      required:
-      - userId
-      - workitemId
-      properties:
-        eventName:
-          type: string
-          description: Name given to the transfer event.
-        recording:
-          $ref: '#/components/schemas/WorkitemRecordingOption'
-        survey:
-          type: object
-          description: Survey data.
-        userId:
-          type: string
-          description: The ID of the user (agent) to transfer the workitem to.
-        workitemId:
-          type: string
-          description: The ID of the workitem to transfer.
   securitySchemes:
     bearerAuth:
       type: http

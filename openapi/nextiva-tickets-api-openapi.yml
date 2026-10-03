@@ -40,29 +40,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ContactPartial:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-    PaginatedResponse:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: Number of objects in the current page.
-        total:
-          type: integer
-          format: int32
-          description: Total number of objects matching the criteria.
-        objects:
-          type: array
-          items:
-            type: object
-          description: Array of objects.
     UserParticipantDetails:
       type: object
       properties:
@@ -81,6 +58,13 @@ components:
         phoneNumber:
           type: string
         username:
+          type: string
+    ContactPartial:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
           type: string
     Conversation:
       type: object
@@ -161,6 +145,29 @@ components:
           type: integer
           format: int32
           description: Number of unread messages/events.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    PaginatedResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            type: object
+          description: Array of objects.
     TicketConversationsResponse:
       allOf:
       - $ref: '#/components/schemas/PaginatedResponse'
@@ -203,10 +210,3 @@ components:
           type: string
         user:
           $ref: '#/components/schemas/UserParticipantDetails'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
