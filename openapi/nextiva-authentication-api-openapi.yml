@@ -350,15 +350,18 @@ paths:
       description: Development server
 components:
   schemas:
-    Error:
+    TokenResponse:
       type: object
       properties:
-        code:
+        location:
           type: string
-          description: Error code.
-        message:
+          description: The base URL for the API.
+        token:
           type: string
-          description: Detailed error message.
+          description: The generated JWT authentication token.
+      required:
+      - location
+      - token
     RefreshTokenResponse:
       type: object
       properties:
@@ -375,18 +378,15 @@ components:
       - clientLocation
       - location
       - token
-    TokenResponse:
+    Error:
       type: object
       properties:
-        location:
+        code:
           type: string
-          description: The base URL for the API.
-        token:
+          description: Error code.
+        message:
           type: string
-          description: The generated JWT authentication token.
-      required:
-      - location
-      - token
+          description: Detailed error message.
     ErrorResponse:
       type: object
       description: Standardized error response

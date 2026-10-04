@@ -146,19 +146,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Workitem'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    Workitem:
-      type: object
-      properties:
-        workitemId:
-          type: string
-          description: Unique identifier for the workitem.
     PaginatedResponse:
       type: object
       properties:
@@ -175,3 +162,16 @@ components:
           items:
             type: object
           description: Array of objects.
+    Workitem:
+      type: object
+      properties:
+        workitemId:
+          type: string
+          description: Unique identifier for the workitem.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

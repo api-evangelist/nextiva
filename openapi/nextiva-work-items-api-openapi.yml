@@ -201,25 +201,12 @@ components:
                   type: string
                 workitemId:
                   type: string
-    Message:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Unique identifier for the message.
     Error:
       type: object
       properties:
         code:
           type: string
         message:
-          type: string
-    ConversationCallRecordingData:
-      type: object
-      properties:
-        id:
-          type: string
-        url:
           type: string
     PaginatedResponse:
       type: object
@@ -237,6 +224,19 @@ components:
           items:
             type: object
           description: Array of objects.
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Unique identifier for the message.
+    ConversationCallRecordingData:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
     WorkItemPriority:
       type: integer
       format: int32
