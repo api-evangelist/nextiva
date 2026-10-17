@@ -516,12 +516,131 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ConversationCallRecordingData:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+    ConversationByIdResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
+          engagementData:
+            type: array
+            items:
+              $ref: '#/components/schemas/EngagementData'
+    ConversationFilterTabType:
+      type: string
+      enum:
+      - ALL
+      - ARCHIVED
+      - CALLS
+      - CALLS_AND_TEXTS
+      - CHANNELS
+      - DRAFTS
+      - EXTERNAL
+      - INCOMING_CALLS
+      - INTERNAL
+      - MENTIONS
+      - MISSED_CALLS
+      - OUTGOING_CALLS
+      - TEXTS
+      - UNREAD
+      - VOICEMAILS
+    Workitem:
+      type: object
+      properties:
+        workitemId:
+          type: string
+          description: Unique identifier for the workitem.
+    PaginatedResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            type: object
+          description: Array of objects.
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Unique identifier for the message.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Contact:
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the contact.
+    Participant:
+      type: object
+      properties:
+        addedBy:
+          type: string
+        archivedAt:
+          type: integer
+          format: int64
+        contact:
+          $ref: '#/components/schemas/ContactPartial'
+        firstName:
+          type: string
+        id:
+          type: string
+        joinedAt:
+          type: integer
+          format: int64
+        lastName:
+          type: string
+        notifyByEmail:
+          type: boolean
+        notifyBySMS:
+          type: boolean
+        notifyByVoice:
+          type: boolean
+        notifyByWeb:
+          type: boolean
+        phoneNumber:
+          type: string
+        type:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserParticipantDetails'
+    ConversationActivitySummaryResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConversationActivitySummary'
+    ConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Workitem'
     ConversationActivitySummary:
       type: object
       properties:
@@ -562,7 +681,7 @@ components:
               type: integer
               format: int32
           description: Detailed unread counts by filter.
-    RecentConversationWorkitemEngagementsResponse:
+    TranscriptionsAndRecordingsResponse:
       allOf:
       - $ref: '#/components/schemas/PaginatedResponse'
       - type: object
@@ -570,20 +689,33 @@ components:
           objects:
             type: array
             items:
-              $ref: '#/components/schemas/EngagementData'
-    ContactPartial:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-    EngagementData:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the engagement data.
+              type: object
+              properties:
+                callRecordingData:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConversationCallRecordingData'
+                summary:
+                  type: string
+                transcriptionMessages:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Message'
+                voicemailTranscript:
+                  type: string
+                workitemId:
+                  type: string
+    ConversationsResponseWithContactArray:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/Workitem'
+              - $ref: '#/components/schemas/ContactArray'
     UnreadCounts:
       type: object
       properties:
@@ -602,42 +734,6 @@ components:
         voicemails:
           type: integer
           format: int32
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ConversationByIdResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Workitem'
-          engagementData:
-            type: array
-            items:
-              $ref: '#/components/schemas/EngagementData'
-    PaginatedResponse:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: Number of objects in the current page.
-        total:
-          type: integer
-          format: int32
-          description: Total number of objects matching the criteria.
-        objects:
-          type: array
-          items:
-            type: object
-          description: Array of objects.
     Conversation:
       type: object
       properties:
@@ -717,13 +813,24 @@ components:
           type: integer
           format: int32
           description: Number of unread messages/events.
-    ContactArray:
-      type: object
-      properties:
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
+    RecentConversationWorkitemEngagementsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/EngagementData'
+    TicketConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Conversation'
     UserParticipantDetails:
       type: object
       properties:
@@ -743,130 +850,23 @@ components:
           type: string
         username:
           type: string
-    Workitem:
+    ContactArray:
       type: object
       properties:
-        workitemId:
-          type: string
-          description: Unique identifier for the workitem.
-    ConversationsResponseWithContactArray:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              oneOf:
-              - $ref: '#/components/schemas/Workitem'
-              - $ref: '#/components/schemas/ContactArray'
-    ConversationActivitySummaryResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/ConversationActivitySummary'
-    Participant:
-      type: object
-      properties:
-        addedBy:
-          type: string
-        archivedAt:
-          type: integer
-          format: int64
-        contact:
-          $ref: '#/components/schemas/ContactPartial'
-        firstName:
-          type: string
-        id:
-          type: string
-        joinedAt:
-          type: integer
-          format: int64
-        lastName:
-          type: string
-        notifyByEmail:
-          type: boolean
-        notifyBySMS:
-          type: boolean
-        notifyByVoice:
-          type: boolean
-        notifyByWeb:
-          type: boolean
-        phoneNumber:
-          type: string
-        type:
-          type: string
-        user:
-          $ref: '#/components/schemas/UserParticipantDetails'
-    Message:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Unique identifier for the message.
-    ConversationCallRecordingData:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+    ContactPartial:
       type: object
       properties:
         id:
           type: string
-        url:
+        email:
           type: string
-    TranscriptionsAndRecordingsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              type: object
-              properties:
-                callRecordingData:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/ConversationCallRecordingData'
-                summary:
-                  type: string
-                transcriptionMessages:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Message'
-                voicemailTranscript:
-                  type: string
-                workitemId:
-                  type: string
-    ConversationsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Workitem'
-    TicketConversationsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Conversation'
-    ConversationFilterTabType:
-      type: string
-      enum:
-      - ALL
-      - ARCHIVED
-      - CALLS
-      - CALLS_AND_TEXTS
-      - CHANNELS
-      - DRAFTS
-      - EXTERNAL
-      - INCOMING_CALLS
-      - INTERNAL
-      - MENTIONS
-      - MISSED_CALLS
-      - OUTGOING_CALLS
-      - TEXTS
-      - UNREAD
-      - VOICEMAILS
+    EngagementData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the engagement data.

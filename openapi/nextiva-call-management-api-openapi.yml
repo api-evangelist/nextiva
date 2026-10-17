@@ -148,6 +148,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Workitem:
       type: object
       properties:
@@ -180,13 +187,6 @@ components:
           type: integer
           format: int64
           description: Unix timestamp (ms) when last modified.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

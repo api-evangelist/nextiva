@@ -66,6 +66,15 @@ components:
       required:
       - canDial
       - consentType
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Detailed error message.
     SmsSendMessagePayload:
       type: object
       required:
@@ -128,15 +137,6 @@ components:
         workitemId:
           type: string
           description: The ID associated with a specific work item for tracking purposes.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Detailed error message.
   securitySchemes:
     bearerAuth:
       type: http

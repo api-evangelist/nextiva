@@ -92,6 +92,20 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    WorkitemRecordingOption:
+      type: string
+      enum:
+      - keepCurrent
+      - startRecording
+      - stopRecording
+      description: Recording options for transfers.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     TransferToInboxPayload:
       type: object
       required:
@@ -115,13 +129,6 @@ components:
         workitemId:
           type: string
           description: The ID of the workitem to transfer.
-    WorkitemRecordingOption:
-      type: string
-      enum:
-      - keepCurrent
-      - startRecording
-      - stopRecording
-      description: Recording options for transfers.
     TransferToAgentPayload:
       type: object
       required:
@@ -142,13 +149,6 @@ components:
         workitemId:
           type: string
           description: The ID of the workitem to transfer.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

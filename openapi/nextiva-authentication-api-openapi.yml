@@ -350,6 +350,15 @@ paths:
       description: Development server
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Detailed error message.
     TokenResponse:
       type: object
       properties:
@@ -378,15 +387,6 @@ components:
       - clientLocation
       - location
       - token
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Detailed error message.
     ErrorResponse:
       type: object
       description: Standardized error response
@@ -413,6 +413,27 @@ components:
       - type
       - message
       - code
+    TokenAuthenticationResponse:
+      type: object
+      description: Response containing JWT token and location information
+      properties:
+        clientLocation:
+          type:
+          - string
+          - 'null'
+          description: Client-specific location URL for multi-tenant deployments
+          example: https://client1.nextiva.com
+        location:
+          type: string
+          description: API location URL for the tenant
+          example: https://api1.nextiva.com
+        token:
+          type: string
+          description: JWT token for authentication
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      required:
+      - token
+      - location
     TokenResponse_2:
       type: object
       description: Extended response with token expiration information
@@ -435,27 +456,6 @@ components:
       - location
       - token
       - expiresAt
-    TokenAuthenticationResponse:
-      type: object
-      description: Response containing JWT token and location information
-      properties:
-        clientLocation:
-          type:
-          - string
-          - 'null'
-          description: Client-specific location URL for multi-tenant deployments
-          example: https://client1.nextiva.com
-        location:
-          type: string
-          description: API location URL for the tenant
-          example: https://api1.nextiva.com
-        token:
-          type: string
-          description: JWT token for authentication
-          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-      required:
-      - token
-      - location
   securitySchemes:
     basicAuth:
       type: http

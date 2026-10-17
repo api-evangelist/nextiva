@@ -40,13 +40,22 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ContactPartial:
+    PaginatedResponse:
       type: object
       properties:
-        id:
-          type: string
-        email:
-          type: string
+        count:
+          type: integer
+          format: int32
+          description: Number of objects in the current page.
+        total:
+          type: integer
+          format: int32
+          description: Total number of objects matching the criteria.
+        objects:
+          type: array
+          items:
+            type: object
+          description: Array of objects.
     UserParticipantDetails:
       type: object
       properties:
@@ -73,22 +82,6 @@ components:
           type: string
         message:
           type: string
-    PaginatedResponse:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: Number of objects in the current page.
-        total:
-          type: integer
-          format: int32
-          description: Total number of objects matching the criteria.
-        objects:
-          type: array
-          items:
-            type: object
-          description: Array of objects.
     Participant:
       type: object
       properties:
@@ -122,15 +115,13 @@ components:
           type: string
         user:
           $ref: '#/components/schemas/UserParticipantDetails'
-    TicketConversationsResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          objects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Conversation'
+    ContactPartial:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
     Conversation:
       type: object
       properties:
@@ -210,3 +201,12 @@ components:
           type: integer
           format: int32
           description: Number of unread messages/events.
+    TicketConversationsResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          objects:
+            type: array
+            items:
+              $ref: '#/components/schemas/Conversation'
